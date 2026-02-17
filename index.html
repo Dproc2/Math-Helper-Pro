@@ -232,10 +232,17 @@ function calcMotion() {
   let v=parseFloat(document.getElementById("v").value);
   let t=parseFloat(document.getElementById("t").value);
   let res="";
-  if(!isNaN(S)&&!isNaN(v)&&isNaN(t)) res=`t = S/v = ${S}/${v} = ${(S/v).toFixed(2)} ժ`;
-  else if(!isNaN(S)&&!isNaN(t)&&isNaN(v)) res=`v = S/t = ${S}/${t} = ${(S/t).toFixed(2)} կմ/ժ`;
-  else if(!isNaN(v)&&!isNaN(t)&&isNaN(S)) res=`S = v×t = ${v}×${t} = ${(v*t).toFixed(2)} կմ`;
-  else res="Խնդրում ենք լրացնել ճիշտ երկու տվյալ։";
+  if(!isNaN(S) && !isNaN(v) && isNaN(t)) {
+    res=`t = S/v = ${S}/${v} = ${(S/v).toFixed(2)} ժ`;
+  } else if(!isNaN(S) && !isNaN(t) && isNaN(v)) {
+    res=`v = S/t = ${S}/${t} = ${(S/t).toFixed(2)} կմ/ժ`;
+  } else if(!isNaN(v) && !isNaN(t) && isNaN(S)) {
+    res=`S = v×t = ${v}×${t} = ${(v*t).toFixed(2)} կմ`;
+  } else if(!isNaN(S) && !isNaN(v) && !isNaN(t)) {
+    res=`Տրված են բոլոր տվյալները, հաշվել հնարավոր չէ: Ընտրեք միայն երկուսը։`;
+  } else {
+    res="Խնդրում ենք լրացնել ճիշտ երկու տվյալ։";
+  }
   document.getElementById("motionResult").innerHTML=res;
 }
 
