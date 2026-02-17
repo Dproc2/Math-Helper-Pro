@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Մաթեմատիկական Խնդիրների Օգնական</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Ֆավիկոն տոկոսով -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='50%' x='50%' dominant-baseline='middle' text-anchor='middle' font-size='80'>%</text></svg>">
 <style>
 body {
   font-family: 'Roboto', sans-serif;
@@ -22,6 +24,7 @@ header {
   font-weight: 700;
   letter-spacing: 1px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
 }
 .dashboard {
   display: grid;
@@ -125,13 +128,13 @@ footer {
 </head>
 <body>
 
-<header>ՏԵՔՍՏԱՅԻՆ ԽՆԴԻՐՆԵՐԻ ՀԱՇՎԻՉ 🚀</header>
+<header onclick="window.scrollTo({top:0,behavior:'smooth'})">ՏԵՔՍՏԱՅԻՆ ԽՆԴԻՐՆԵՐԻ ՀԱՇՎԻՉ 🚀</header>
 
 <div class="dashboard">
 
   <!-- Main motion card -->
   <details class="main-card">
-    <summary>🚗 Շարժման խնդիրներ</summary>
+    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">🚗 Շարժման խնդիրներ</summary>
     <label>Ճանապարհ (S, կմ):</label>
     <input id="S" type="number">
     <label>Արագություն (v, կմ/ժ):</label>
@@ -144,7 +147,7 @@ footer {
 
   <!-- Double motion card -->
   <details class="card">
-    <summary>🔄 Երկու մարմնի շարժում</summary>
+    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">🔄 Երկու մարմնի շարժում</summary>
     <p><b>Ընտրիր խնդիրների տեսակը:</b></p>
     <label class="radio-label"><input type="radio" name="motionTypeRadio" value="opposite" checked> Հանդիպակաց շարժում</label>
     <label class="radio-label"><input type="radio" name="motionTypeRadio" value="same"> Նույն ուղղությամբ</label>
@@ -183,7 +186,7 @@ footer {
   </details>
 
   <details class="card">
-    <summary>💰 Տոկոսների խնդիրներ</summary>
+    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">💰 Տոկոսների խնդիրներ</summary>
     <label>Թիվը:</label>
     <input id="num" type="number">
     <label>Տոկոսի չափ (%):</label>
@@ -193,7 +196,7 @@ footer {
   </details>
 
   <details class="card">
-    <summary>🍎 Մասերի խնդիրներ</summary>
+    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">🍎 Մասերի խնդիրներ</summary>
     <label>Ամբողջ թիվը:</label>
     <input id="whole" type="number">
     <label>Հատկացված մասնաբաժինը (օր. 2/5):</label>
@@ -203,7 +206,7 @@ footer {
   </details>
 
   <details class="card">
-    <summary>🔢 Պարզ գործողություններ</summary>
+    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">🔢 Պարզ գործողություններ</summary>
     <label>Թիվ 1:</label>
     <input id="n1" type="number">
     <label>Թիվ 2:</label>
@@ -223,6 +226,7 @@ footer {
 <footer>© 2025 Ուսումնական Նախագիծ</footer>
 
 <script>
+// Motion calculations
 function calcMotion() {
   let S=parseFloat(document.getElementById("S").value);
   let v=parseFloat(document.getElementById("v").value);
@@ -235,6 +239,7 @@ function calcMotion() {
   document.getElementById("motionResult").innerHTML=res;
 }
 
+// Double motion calculations
 function calcDoubleMotion() {
   let type = document.querySelector('input[name="motionTypeRadio"]:checked').value;
   let res="";
@@ -256,7 +261,7 @@ function calcDoubleMotion() {
     else if(v2<=v1){res="Երկրորդը ավելի արագ պետք է լինի, հակառակ դեպքում հանդիպում չի լինի։";}
     else{
       let S1=v1*t_delay;
-      let t_meet=S1/(v2-v1); // կամ ըստ ընդհանուր հեռավորության՝ կարող է լրացվել
+      let t_meet=S1/(v2-v1);
       res=`Առաջինը անցավ ${S1.toFixed(2)} կմ, հանդիպման ժամանակը = ${t_meet.toFixed(2)} ժ`;
     }
   } else if(type==="specificDistance"){
@@ -285,6 +290,7 @@ document.querySelectorAll('input[name="motionTypeRadio"]').forEach(radio=>{
   });
 });
 
+// Percent
 function calcPercent() {
   let n=parseFloat(document.getElementById("num").value);
   let p=parseFloat(document.getElementById("percent").value);
@@ -292,6 +298,7 @@ function calcPercent() {
   else document.getElementById("percentResult").innerHTML="Լրացրեք բոլոր դաշտերը։";
 }
 
+// Fraction
 function calcFraction() {
   let whole=parseFloat(document.getElementById("whole").value);
   let frac=document.getElementById("fraction").value.split("/");
@@ -301,6 +308,7 @@ function calcFraction() {
   } else document.getElementById("fractionResult").innerHTML="Մուտքագրեք ճիշտ տվյալներ։";
 }
 
+// Basic operations
 function calcBasic() {
   let a=parseFloat(document.getElementById("n1").value);
   let b=parseFloat(document.getElementById("n2").value);
