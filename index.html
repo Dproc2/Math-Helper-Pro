@@ -24,7 +24,7 @@ header {
   font-weight: 700;
   letter-spacing: 1px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  cursor: pointer;
+  cursor: default;
 }
 .dashboard {
   display: grid;
@@ -128,13 +128,13 @@ footer {
 </head>
 <body>
 
-<header onclick="window.scrollTo({top:0,behavior:'smooth'})">ՏԵՔՍՏԱՅԻՆ ԽՆԴԻՐՆԵՐԻ ՀԱՇՎԻՉ 🚀</header>
+<header>ՏԵՔՍՏԱՅԻՆ ԽՆԴԻՐՆԵՐԻ ՀԱՇՎԻՉ 🚀</header>
 
 <div class="dashboard">
 
   <!-- Main motion card -->
   <details class="main-card">
-    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">🚗 Շարժման խնդիրներ</summary>
+    <summary>🚗 Շարժման խնդիրներ</summary>
     <label>Ճանապարհ (S, կմ):</label>
     <input id="S" type="number">
     <label>Արագություն (v, կմ/ժ):</label>
@@ -147,7 +147,7 @@ footer {
 
   <!-- Double motion card -->
   <details class="card">
-    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">🔄 Երկու մարմնի շարժում</summary>
+    <summary>🔄 Երկու մարմնի շարժում</summary>
     <p><b>Ընտրիր խնդիրների տեսակը:</b></p>
     <label class="radio-label"><input type="radio" name="motionTypeRadio" value="opposite" checked> Հանդիպակաց շարժում</label>
     <label class="radio-label"><input type="radio" name="motionTypeRadio" value="same"> Նույն ուղղությամբ</label>
@@ -186,7 +186,7 @@ footer {
   </details>
 
   <details class="card">
-    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">💰 Տոկոսների խնդիրներ</summary>
+    <summary>💰 Տոկոսների խնդիրներ</summary>
     <label>Թիվը:</label>
     <input id="num" type="number">
     <label>Տոկոսի չափ (%):</label>
@@ -196,7 +196,7 @@ footer {
   </details>
 
   <details class="card">
-    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">🍎 Մասերի խնդիրներ</summary>
+    <summary>🍎 Մասերի խնդիրներ</summary>
     <label>Ամբողջ թիվը:</label>
     <input id="whole" type="number">
     <label>Հատկացված մասնաբաժինը (օր. 2/5):</label>
@@ -206,7 +206,7 @@ footer {
   </details>
 
   <details class="card">
-    <summary onclick="window.scrollTo({top:0,behavior:'smooth'})">🔢 Պարզ գործողություններ</summary>
+    <summary>🔢 Պարզ գործողություններ</summary>
     <label>Թիվ 1:</label>
     <input id="n1" type="number">
     <label>Թիվ 2:</label>
