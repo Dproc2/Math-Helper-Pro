@@ -4,329 +4,285 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Մաթեմատիկական Խնդիրների Օգնական</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<!-- Ֆավիկոն տոկոսով -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='50%' x='50%' dominant-baseline='middle' text-anchor='middle' font-size='80'>%</text></svg>">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
+* { box-sizing: border-box; }
+
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
-  padding: 0;
-  background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: #222;
 }
+
 header {
   text-align: center;
-  background: #1976d2;
   color: white;
   padding: 30px 0;
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 700;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  cursor: default;
 }
+
 .dashboard {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-auto-rows: minmax(180px, auto);
-  gap: 30px;
-  padding: 50px;
-  justify-items: center;
-  align-items: start;
+  gap: 25px;
+  padding: 40px;
 }
-.main-card {
-  grid-column: 1 / -1;
-  width: 90%;
-  max-width: 800px;
-  background: linear-gradient(135deg, #ffffff, #e3f2fd);
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-  padding: 35px;
-  text-align: center;
-  font-size: 20px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.main-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.35);
-}
-.card {
-  background: linear-gradient(135deg, #ffffff, #f0f4ff);
+
+.card, .main-card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
   border-radius: 18px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-  padding: 28px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  font-size: 18px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  color: white;
+  transition: 0.3s;
 }
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+
+.main-card { grid-column: 1 / -1; }
+
+.card:hover, .main-card:hover {
+  transform: translateY(-5px);
 }
-.card summary, .main-card summary {
-  font-size: 22px;
-  font-weight: 500;
-  color: #1565c0;
+
+summary {
+  font-size: 20px;
+  font-weight: 600;
   cursor: pointer;
   margin-bottom: 10px;
 }
+
 input, select {
-  width: 95%;
+  width: 100%;
   padding: 10px;
-  margin: 8px 0;
+  margin: 6px 0;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
-button {
-  background: #1565c0;
-  color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  cursor: pointer;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
   margin-top: 10px;
-  font-size: 16px;
-  font-weight: 500;
-  transition: background 0.3s;
-}
-button:hover {
-  background: #0d47a1;
-}
-.result {
-  margin-top: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
   font-weight: bold;
-  font-size: 16px;
-  color: green;
+  cursor: pointer;
+  transition: 0.3s;
 }
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.result {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+}
+
+.radio-label {
+  display: block;
+  margin: 5px 0;
+}
+
+.hidden { display: none; }
+
 footer {
   text-align: center;
-  font-size: 12px;
-  color: #444;
-  margin: 70px 0 20px 0;
-  letter-spacing: 0.5px;
-}
-.radio-label {
-  display: inline-block;
-  margin-right: 15px;
-  font-weight: 500;
-  cursor: pointer;
-}
-.hidden {
-  display: none;
-}
-@media(max-width: 650px){
-  .dashboard {
-    padding: 30px 20px;
-    gap: 20px;
-  }
+  color: white;
+  margin: 20px;
 }
 </style>
 </head>
+
 <body>
 
-<header>ՏԵՔՍՏԱՅԻՆ ԽՆԴԻՐՆԵՐԻ ՀԱՇՎԻՉ 🚀</header>
+<header>🚀 Խնդիրների Հաշվիչ</header>
 
 <div class="dashboard">
 
-  <!-- Main motion card -->
-  <details class="main-card">
-    <summary>🚗 Շարժման խնդիրներ</summary>
-    <label>Ճանապարհ (S, կմ):</label>
-    <input id="S" type="number">
-    <label>Արագություն (v, կմ/ժ):</label>
-    <input id="v" type="number">
-    <label>Ժամանակ (t, ժ):</label>
-    <input id="t" type="number">
-    <button onclick="calcMotion()">Հաշվել</button>
-    <div class="result" id="motionResult"></div>
-  </details>
+<!-- Շարժում -->
+<details class="main-card">
+<summary>🚗 Շարժման խնդիրներ</summary>
 
-  <!-- Double motion card -->
-  <details class="card">
-    <summary>🔄 Երկու մարմնի շարժում</summary>
-    <p><b>Ընտրիր խնդիրների տեսակը:</b></p>
-    <label class="radio-label"><input type="radio" name="motionTypeRadio" value="opposite" checked> Հանդիպակաց շարժում</label>
-    <label class="radio-label"><input type="radio" name="motionTypeRadio" value="same"> Նույն ուղղությամբ</label>
-    <label class="radio-label"><input type="radio" name="motionTypeRadio" value="delayed"> Երկրորդը ուշ է մեկնարկել</label>
-    <label class="radio-label"><input type="radio" name="motionTypeRadio" value="specificDistance">Հանդիպել որոշված հեռավորության վրա</label>
-    
-    <div id="inputsOppSame">
-      <label>Հեռավորություն (S, կմ):</label>
-      <input id="S2" type="number">
-      <label>Առաջին արագություն (v₁, կմ/ժ):</label>
-      <input id="v1" type="number">
-      <label>Երկրորդ արագություն (v₂, կմ/ժ):</label>
-      <input id="v2" type="number">
-    </div>
+<input id="S" placeholder="Ճանապարհ (S)">
+<input id="v" placeholder="Արագություն (v)">
+<input id="t" placeholder="Ժամանակ (t)">
 
-    <div id="inputsDelayed" class="hidden">
-      <label>Առաջին արագություն (v₁, կմ/ժ):</label>
-      <input id="v1_delay" type="number">
-      <label>Երկրորդ արագություն (v₂, կմ/ժ):</label>
-      <input id="v2_delay" type="number">
-      <label>Երկրորդի ուշացում (t_delay, ժ):</label>
-      <input id="t_delay" type="number">
-    </div>
+<button onclick="calcMotion()">Հաշվել</button>
+<div class="result" id="motionResult"></div>
+</details>
 
-    <div id="inputsSpecificDistance" class="hidden">
-      <label>Հեռավորություն մինչև հանդիպման կետը (S_meet, կմ):</label>
-      <input id="S_meet" type="number">
-      <label>Առաջին արագություն (v₁, կմ/ժ):</label>
-      <input id="v1_spec" type="number">
-      <label>Երկրորդ արագություն (v₂, կմ/ժ):</label>
-      <input id="v2_spec" type="number">
-    </div>
+<!-- Երկու մարմին -->
+<details class="card">
+<summary>🔄 Երկու մարմնի շարժում</summary>
 
-    <button onclick="calcDoubleMotion()">Հաշվել</button>
-    <div class="result" id="motion2Result"></div>
-  </details>
+<label class="radio-label"><input type="radio" name="motionTypeRadio" value="opposite" checked> Հանդիպակաց շարժում</label>
+<label class="radio-label"><input type="radio" name="motionTypeRadio" value="same"> Նույն ուղղությամբ</label>
+<label class="radio-label"><input type="radio" name="motionTypeRadio" value="delayed"> Երկրորդը ուշ է մեկնարկել</label>
 
-  <details class="card">
-    <summary>💰 Տոկոսների խնդիրներ</summary>
-    <label>Թիվը:</label>
-    <input id="num" type="number">
-    <label>Տոկոսի չափ (%):</label>
-    <input id="percent" type="number">
-    <button onclick="calcPercent()">Հաշվել</button>
-    <div class="result" id="percentResult"></div>
-  </details>
+<div id="inputsOppSame">
+<input id="S2" placeholder="Հեռավորություն (S)">
+<input id="v1" placeholder="Առաջին արագություն v₁">
+<input id="v2" placeholder="Երկրորդ արագություն v₂">
+</div>
 
-  <details class="card">
-    <summary>🍎 Մասերի խնդիրներ</summary>
-    <label>Ամբողջ թիվը:</label>
-    <input id="whole" type="number">
-    <label>Հատկացված մասնաբաժինը (օր. 2/5):</label>
-    <input id="fraction" placeholder="օր. 2/5">
-    <button onclick="calcFraction()">Հաշվել</button>
-    <div class="result" id="fractionResult"></div>
-  </details>
+<div id="inputsDelayed" class="hidden">
+<input id="v1_delay" placeholder="Առաջին արագություն v₁">
+<input id="v2_delay" placeholder="Երկրորդ արագություն v₂">
+<input id="t_delay" placeholder="Ուշացում (ժ)">
+</div>
 
-  <details class="card">
-    <summary>🔢 Պարզ գործողություններ</summary>
-    <label>Թիվ 1:</label>
-    <input id="n1" type="number">
-    <label>Թիվ 2:</label>
-    <input id="n2" type="number">
-    <select id="op">
-      <option value="+">+</option>
-      <option value="-">−</option>
-      <option value="*">×</option>
-      <option value="/">÷</option>
-    </select>
-    <button onclick="calcBasic()">Հաշվել</button>
-    <div class="result" id="basicResult"></div>
-  </details>
+<button onclick="calcDoubleMotion()">Հաշվել</button>
+<div class="result" id="motion2Result"></div>
+</details>
+
+<!-- Տոկոս -->
+<details class="card">
+<summary>💰 Տոկոսների խնդիրներ</summary>
+
+<input id="num" placeholder="Թիվ">
+<input id="percent" placeholder="Տոկոս (%)">
+
+<button onclick="calcPercent()">Հաշվել</button>
+<div class="result" id="percentResult"></div>
+</details>
+
+<!-- Մաս -->
+<details class="card">
+<summary>🍎 Մասերի խնդիրներ</summary>
+
+<input id="whole" placeholder="Ամբողջ թիվ">
+<input id="fraction" placeholder="օր. 2/5">
+
+<button onclick="calcFraction()">Հաշվել</button>
+<div class="result" id="fractionResult"></div>
+</details>
+
+<!-- Գործողություններ -->
+<details class="card">
+<summary>🔢 Պարզ գործողություններ</summary>
+
+<input id="n1" placeholder="Թիվ 1">
+<input id="n2" placeholder="Թիվ 2">
+
+<select id="op">
+<option value="+">+</option>
+<option value="-">−</option>
+<option value="*">×</option>
+<option value="/">÷</option>
+</select>
+
+<button onclick="calcBasic()">Հաշվել</button>
+<div class="result" id="basicResult"></div>
+</details>
 
 </div>
 
-<footer> © Նախագծային աշխատանք  </footer>
+<footer>© Նախագծային աշխատանք</footer>
 
 <script>
-// Motion calculations
+// Շարժում
 function calcMotion() {
-  let S=parseFloat(document.getElementById("S").value);
-  let v=parseFloat(document.getElementById("v").value);
-  let t=parseFloat(document.getElementById("t").value);
-  let res="";
-  if(!isNaN(S) && !isNaN(v) && isNaN(t)) {
-    res=`t = S/v = ${S}/${v} = ${(S/v).toFixed(2)} ժ`;
-  } else if(!isNaN(S) && !isNaN(t) && isNaN(v)) {
-    res=`v = S/t = ${S}/${t} = ${(S/t).toFixed(2)} կմ/ժ`;
-  } else if(!isNaN(v) && !isNaN(t) && isNaN(S)) {
-    res=`S = v×t = ${v}×${t} = ${(v*t).toFixed(2)} կմ`;
-  } else if(!isNaN(S) && !isNaN(v) && !isNaN(t)) {
-    res=`Տրված են բոլոր տվյալները, հաշվել հնարավոր չէ: Ընտրեք միայն երկուսը։`;
-  } else {
-    res="Խնդրում ենք լրացնել ճիշտ երկու տվյալ։";
-  }
-  document.getElementById("motionResult").innerHTML=res;
+let S=parseFloat(document.getElementById("S").value);
+let v=parseFloat(document.getElementById("v").value);
+let t=parseFloat(document.getElementById("t").value);
+let res="";
+
+if(!isNaN(S)&&!isNaN(v)&&isNaN(t))
+res=`t = ${(S/v).toFixed(2)} ժ`;
+else if(!isNaN(S)&&!isNaN(t)&&isNaN(v))
+res=`v = ${(S/t).toFixed(2)} կմ/ժ`;
+else if(!isNaN(v)&&!isNaN(t)&&isNaN(S))
+res=`S = ${(v*t).toFixed(2)} կմ`;
+else
+res="Լրացրեք ճիշտ 2 տվյալ";
+
+document.getElementById("motionResult").innerHTML=res;
 }
 
-// Double motion calculations
-function calcDoubleMotion() {
-  let type = document.querySelector('input[name="motionTypeRadio"]:checked').value;
-  let res="";
-  if(type==="opposite" || type==="same"){
-    let S=parseFloat(document.getElementById("S2").value);
-    let v1=parseFloat(document.getElementById("v1").value);
-    let v2=parseFloat(document.getElementById("v2").value);
-    if(isNaN(S)||isNaN(v1)||isNaN(v2)){res="Լրացրեք բոլոր դաշտերը։";}
-    else{
-      let t=(type==="opposite")? S/(v1+v2) : S/Math.abs(v1-v2);
-      res=(type==="opposite")? `Հանդիպման ժամանակը = S/(v₁+v₂) = ${S}/(${v1}+${v2}) = <b>${t.toFixed(2)} ժ</b>`
-        : `Հետապնդման ժամանակը = S/|v₁−v₂| = ${S}/|${v1}-${v2}| = <b>${t.toFixed(2)} ժ</b>`;
-    }
-  } else if(type==="delayed"){
-    let v1=parseFloat(document.getElementById("v1_delay").value);
-    let v2=parseFloat(document.getElementById("v2_delay").value);
-    let t_delay=parseFloat(document.getElementById("t_delay").value);
-    if(isNaN(v1)||isNaN(v2)||isNaN(t_delay)){res="Լրացրեք բոլոր դաշտերը։";}
-    else if(v2<=v1){res="Երկրորդը ավելի արագ պետք է լինի, հակառակ դեպքում հանդիպում չի լինի։";}
-    else{
-      let S1=v1*t_delay;
-      let t_meet=S1/(v2-v1);
-      res=`Առաջինը անցավ ${S1.toFixed(2)} կմ, հանդիպման ժամանակը = ${t_meet.toFixed(2)} ժ`;
-    }
-  } else if(type==="specificDistance"){
-    let S_meet=parseFloat(document.getElementById("S_meet").value);
-    let v1=parseFloat(document.getElementById("v1_spec").value);
-    let v2=parseFloat(document.getElementById("v2_spec").value);
-    if(isNaN(S_meet)||isNaN(v1)||isNaN(v2)){res="Լրացրեք բոլոր դաշտերը։";}
-    else{
-      let t=S_meet/(v1+v2);
-      res=`Հանդիպման կետը ${S_meet} կմ, հանդիպման ժամանակը ≈ ${t.toFixed(2)} ժ`;
-    }
-  }
-  document.getElementById("motion2Result").innerHTML=res;
+// Երկու մարմին
+function calcDoubleMotion(){
+let type=document.querySelector('input[name="motionTypeRadio"]:checked').value;
+let res="";
+
+if(type==="opposite"||type==="same"){
+let S=parseFloat(document.getElementById("S2").value);
+let v1=parseFloat(document.getElementById("v1").value);
+let v2=parseFloat(document.getElementById("v2").value);
+
+if(isNaN(S)||isNaN(v1)||isNaN(v2)) res="Լրացրեք բոլոր դաշտերը";
+else{
+let t=(type==="opposite")? S/(v1+v2): S/Math.abs(v1-v2);
+res=`Ժամանակ = ${t.toFixed(2)} ժ`;
+}
 }
 
-// Show/hide inputs based on type
-document.querySelectorAll('input[name="motionTypeRadio"]').forEach(radio=>{
-  radio.addEventListener('change',()=>{
-    let type = document.querySelector('input[name="motionTypeRadio"]:checked').value;
-    document.getElementById("inputsOppSame").classList.add("hidden");
-    document.getElementById("inputsDelayed").classList.add("hidden");
-    document.getElementById("inputsSpecificDistance").classList.add("hidden");
-    if(type==="opposite" || type==="same") document.getElementById("inputsOppSame").classList.remove("hidden");
-    else if(type==="delayed") document.getElementById("inputsDelayed").classList.remove("hidden");
-    else if(type==="specificDistance") document.getElementById("inputsSpecificDistance").classList.remove("hidden");
-  });
+else{
+let v1=parseFloat(document.getElementById("v1_delay").value);
+let v2=parseFloat(document.getElementById("v2_delay").value);
+let td=parseFloat(document.getElementById("t_delay").value);
+
+if(isNaN(v1)||isNaN(v2)||isNaN(td)) res="Լրացրեք բոլոր դաշտերը";
+else{
+let t=(v1*td)/(v2-v1);
+res=`Ժամանակ = ${t.toFixed(2)} ժ`;
+}
+}
+
+document.getElementById("motion2Result").innerHTML=res;
+}
+
+// toggle inputs
+document.querySelectorAll('input[name="motionTypeRadio"]').forEach(r=>{
+r.addEventListener("change",()=>{
+document.getElementById("inputsOppSame").classList.add("hidden");
+document.getElementById("inputsDelayed").classList.add("hidden");
+
+if(r.value==="delayed")
+document.getElementById("inputsDelayed").classList.remove("hidden");
+else
+document.getElementById("inputsOppSame").classList.remove("hidden");
+});
 });
 
-// Percent
-function calcPercent() {
-  let n=parseFloat(document.getElementById("num").value);
-  let p=parseFloat(document.getElementById("percent").value);
-  if(!isNaN(n)&&!isNaN(p)) document.getElementById("percentResult").innerHTML=`${p}% -ը ${n}-ի հավասար է ${(n*p/100).toFixed(2)}`;
-  else document.getElementById("percentResult").innerHTML="Լրացրեք բոլոր դաշտերը։";
+// տոկոս
+function calcPercent(){
+let n=parseFloat(num.value);
+let p=parseFloat(percent.value);
+if(!isNaN(n)&&!isNaN(p))
+percentResult.innerHTML=`${(n*p/100).toFixed(2)}`;
+else
+percentResult.innerHTML="Լրացրեք";
 }
 
-// Fraction
-function calcFraction() {
-  let whole=parseFloat(document.getElementById("whole").value);
-  let frac=document.getElementById("fraction").value.split("/");
-  if(frac.length===2 && !isNaN(whole)){
-    let a=parseFloat(frac[0]), b=parseFloat(frac[1]);
-    document.getElementById("fractionResult").innerHTML=`Պատասխանը՝ ${(whole*a/b).toFixed(2)}`;
-  } else document.getElementById("fractionResult").innerHTML="Մուտքագրեք ճիշտ տվյալներ։";
+// մաս
+function calcFraction(){
+let w=parseFloat(whole.value);
+let f=fraction.value.split("/");
+if(f.length===2){
+fractionResult.innerHTML=(w*f[0]/f[1]).toFixed(2);
+}else fractionResult.innerHTML="Սխալ մուտք";
 }
 
-// Basic operations
-function calcBasic() {
-  let a=parseFloat(document.getElementById("n1").value);
-  let b=parseFloat(document.getElementById("n2").value);
-  let op=document.getElementById("op").value;
-  let res=0;
-  if(isNaN(a)||isNaN(b)){document.getElementById("basicResult").innerHTML="Լրացրեք երկու թվերը։";return;}
-  if(op==="+") res=a+b;
-  if(op==="−"||op==="-") res=a-b;
-  if(op==="*") res=a*b;
-  if(op==="/") res=(b!==0)? a/b : "Անթույլատրելի (0-ով բաժանում)";
-  document.getElementById("basicResult").innerHTML=`Պատասխանը՝ ${res}`;
+// գործողություններ
+function calcBasic(){
+let a=parseFloat(n1.value);
+let b=parseFloat(n2.value);
+let o=op.value;
+
+if(isNaN(a)||isNaN(b)){basicResult.innerHTML="Լրացրեք";return;}
+
+let r= o=="+"?a+b: o=="-"?a-b: o=="*"?a*b: (b!==0? a/b:"0-ով չի կարելի");
+basicResult.innerHTML=r;
 }
 </script>
 
