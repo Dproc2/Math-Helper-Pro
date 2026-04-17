@@ -13,103 +13,121 @@
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: #222;
+  background: #eef3f8; /* բաց, բայց ոչ սպիտակ */
 }
 
+/* HEADER */
 header {
   text-align: center;
+  background: linear-gradient(135deg, #4facfe, #00c6ff);
   color: white;
-  padding: 30px 0;
-  font-size: 32px;
+  padding: 25px;
+  font-size: 30px;
   font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
+/* GRID */
 .dashboard {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
   padding: 40px;
+  justify-items: center;
 }
 
+/* CARDS */
 .card, .main-card {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(12px);
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  color: white;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  max-width: 420px;
+  border: 2px solid #dbe7f3;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
   transition: 0.3s;
 }
 
-.main-card { grid-column: 1 / -1; }
+.main-card {
+  grid-column: 1 / -1;
+  max-width: 600px;
+}
 
 .card:hover, .main-card:hover {
   transform: translateY(-5px);
 }
 
+/* SUMMARY */
 summary {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
+  color: #1565c0;
   cursor: pointer;
   margin-bottom: 10px;
 }
 
+/* INPUT */
 input, select {
   width: 100%;
   padding: 10px;
   margin: 6px 0;
   border-radius: 8px;
-  border: none;
-  outline: none;
+  border: 1px solid #ccc;
 }
 
+/* BUTTON */
 button {
   width: 100%;
-  padding: 12px;
+  padding: 11px;
   margin-top: 10px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border-radius: 8px;
+  background: #1976d2;
   color: white;
-  font-weight: bold;
+  font-weight: 500;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 button:hover {
-  transform: scale(1.05);
+  background: #0d47a1;
 }
 
+/* RESULT */
 .result {
   margin-top: 10px;
   padding: 10px;
-  background: rgba(0,0,0,0.3);
+  background: #e3f2fd;
   border-radius: 8px;
+  font-weight: bold;
 }
 
+/* RADIO */
 .radio-label {
   display: block;
   margin: 5px 0;
 }
 
+/* HIDDEN */
 .hidden { display: none; }
 
+/* FOOTER */
 footer {
   text-align: center;
-  color: white;
-  margin: 20px;
+  margin-top: 120px;
+  margin-bottom: 30px;
+  color: #666;
 }
 </style>
 </head>
 
 <body>
 
-<header>🚀 Խնդիրների Հաշվիչ</header>
+<header onclick="location.reload()">🚀 Խնդիրների Հաշվիչ</header>
 
 <div class="dashboard">
 
-<!-- Շարժում -->
+<!-- Շարժում (մեջտեղ) -->
 <details class="main-card">
 <summary>🚗 Շարժման խնդիրներ</summary>
 
@@ -125,20 +143,20 @@ footer {
 <details class="card">
 <summary>🔄 Երկու մարմնի շարժում</summary>
 
-<label class="radio-label"><input type="radio" name="motionTypeRadio" value="opposite" checked> Հանդիպակաց շարժում</label>
+<label class="radio-label"><input type="radio" name="motionTypeRadio" value="opposite" checked> Հանդիպակաց</label>
 <label class="radio-label"><input type="radio" name="motionTypeRadio" value="same"> Նույն ուղղությամբ</label>
-<label class="radio-label"><input type="radio" name="motionTypeRadio" value="delayed"> Երկրորդը ուշ է մեկնարկել</label>
+<label class="radio-label"><input type="radio" name="motionTypeRadio" value="delayed"> Ուշացումով</label>
 
 <div id="inputsOppSame">
-<input id="S2" placeholder="Հեռավորություն (S)">
-<input id="v1" placeholder="Առաջին արագություն v₁">
-<input id="v2" placeholder="Երկրորդ արագություն v₂">
+<input id="S2" placeholder="Հեռավորություն">
+<input id="v1" placeholder="v₁">
+<input id="v2" placeholder="v₂">
 </div>
 
 <div id="inputsDelayed" class="hidden">
-<input id="v1_delay" placeholder="Առաջին արագություն v₁">
-<input id="v2_delay" placeholder="Երկրորդ արագություն v₂">
-<input id="t_delay" placeholder="Ուշացում (ժ)">
+<input id="v1_delay" placeholder="v₁">
+<input id="v2_delay" placeholder="v₂">
+<input id="t_delay" placeholder="ուշացում">
 </div>
 
 <button onclick="calcDoubleMotion()">Հաշվել</button>
@@ -147,10 +165,10 @@ footer {
 
 <!-- Տոկոս -->
 <details class="card">
-<summary>💰 Տոկոսների խնդիրներ</summary>
+<summary>💰 Տոկոսներ</summary>
 
 <input id="num" placeholder="Թիվ">
-<input id="percent" placeholder="Տոկոս (%)">
+<input id="percent" placeholder="%">
 
 <button onclick="calcPercent()">Հաշվել</button>
 <div class="result" id="percentResult"></div>
@@ -158,9 +176,9 @@ footer {
 
 <!-- Մաս -->
 <details class="card">
-<summary>🍎 Մասերի խնդիրներ</summary>
+<summary>🍎 Մասեր</summary>
 
-<input id="whole" placeholder="Ամբողջ թիվ">
+<input id="whole" placeholder="Ամբողջ">
 <input id="fraction" placeholder="օր. 2/5">
 
 <button onclick="calcFraction()">Հաշվել</button>
@@ -169,7 +187,7 @@ footer {
 
 <!-- Գործողություններ -->
 <details class="card">
-<summary>🔢 Պարզ գործողություններ</summary>
+<summary>🔢 Գործողություններ</summary>
 
 <input id="n1" placeholder="Թիվ 1">
 <input id="n2" placeholder="Թիվ 2">
@@ -191,97 +209,51 @@ footer {
 
 <script>
 // Շարժում
-function calcMotion() {
-let S=parseFloat(document.getElementById("S").value);
-let v=parseFloat(document.getElementById("v").value);
-let t=parseFloat(document.getElementById("t").value);
-let res="";
-
-if(!isNaN(S)&&!isNaN(v)&&isNaN(t))
-res=`t = ${(S/v).toFixed(2)} ժ`;
-else if(!isNaN(S)&&!isNaN(t)&&isNaN(v))
-res=`v = ${(S/t).toFixed(2)} կմ/ժ`;
-else if(!isNaN(v)&&!isNaN(t)&&isNaN(S))
-res=`S = ${(v*t).toFixed(2)} կմ`;
-else
-res="Լրացրեք ճիշտ 2 տվյալ";
-
-document.getElementById("motionResult").innerHTML=res;
+function calcMotion(){
+let S=parseFloat(S.value), v=parseFloat(v.value), t=parseFloat(t.value);
+if(S && v && !t) motionResult.innerHTML=`t=${(S/v).toFixed(2)} ժ`;
+else if(S && t && !v) motionResult.innerHTML=`v=${(S/t).toFixed(2)} կմ/ժ`;
+else if(v && t && !S) motionResult.innerHTML=`S=${(v*t).toFixed(2)} կմ`;
+else motionResult.innerHTML="Լրացրեք ճիշտ 2 տվյալ";
 }
 
 // Երկու մարմին
 function calcDoubleMotion(){
 let type=document.querySelector('input[name="motionTypeRadio"]:checked').value;
-let res="";
-
 if(type==="opposite"||type==="same"){
-let S=parseFloat(document.getElementById("S2").value);
-let v1=parseFloat(document.getElementById("v1").value);
-let v2=parseFloat(document.getElementById("v2").value);
-
-if(isNaN(S)||isNaN(v1)||isNaN(v2)) res="Լրացրեք բոլոր դաշտերը";
-else{
-let t=(type==="opposite")? S/(v1+v2): S/Math.abs(v1-v2);
-res=`Ժամանակ = ${t.toFixed(2)} ժ`;
+let t=(type==="opposite")? S2.value/(v1.value*1+v2.value*1): S2.value/Math.abs(v1.value-v2.value);
+motion2Result.innerHTML=`Ժամանակ=${(+t).toFixed(2)} ժ`;
+}else{
+let t=(v1_delay.value*t_delay.value)/(v2_delay.value-v1_delay.value);
+motion2Result.innerHTML=`Ժամանակ=${(+t).toFixed(2)} ժ`;
 }
 }
 
-else{
-let v1=parseFloat(document.getElementById("v1_delay").value);
-let v2=parseFloat(document.getElementById("v2_delay").value);
-let td=parseFloat(document.getElementById("t_delay").value);
-
-if(isNaN(v1)||isNaN(v2)||isNaN(td)) res="Լրացրեք բոլոր դաշտերը";
-else{
-let t=(v1*td)/(v2-v1);
-res=`Ժամանակ = ${t.toFixed(2)} ժ`;
-}
-}
-
-document.getElementById("motion2Result").innerHTML=res;
-}
-
-// toggle inputs
+// toggle
 document.querySelectorAll('input[name="motionTypeRadio"]').forEach(r=>{
-r.addEventListener("change",()=>{
-document.getElementById("inputsOppSame").classList.add("hidden");
-document.getElementById("inputsDelayed").classList.add("hidden");
-
-if(r.value==="delayed")
-document.getElementById("inputsDelayed").classList.remove("hidden");
-else
-document.getElementById("inputsOppSame").classList.remove("hidden");
-});
+r.onchange=()=>{
+inputsOppSame.classList.add("hidden");
+inputsDelayed.classList.add("hidden");
+if(r.value==="delayed") inputsDelayed.classList.remove("hidden");
+else inputsOppSame.classList.remove("hidden");
+}
 });
 
 // տոկոս
 function calcPercent(){
-let n=parseFloat(num.value);
-let p=parseFloat(percent.value);
-if(!isNaN(n)&&!isNaN(p))
-percentResult.innerHTML=`${(n*p/100).toFixed(2)}`;
-else
-percentResult.innerHTML="Լրացրեք";
+percentResult.innerHTML=(num.value*percent.value/100).toFixed(2);
 }
 
 // մաս
 function calcFraction(){
-let w=parseFloat(whole.value);
 let f=fraction.value.split("/");
-if(f.length===2){
-fractionResult.innerHTML=(w*f[0]/f[1]).toFixed(2);
-}else fractionResult.innerHTML="Սխալ մուտք";
+fractionResult.innerHTML=(whole.value*f[0]/f[1]).toFixed(2);
 }
 
 // գործողություններ
 function calcBasic(){
-let a=parseFloat(n1.value);
-let b=parseFloat(n2.value);
-let o=op.value;
-
-if(isNaN(a)||isNaN(b)){basicResult.innerHTML="Լրացրեք";return;}
-
-let r= o=="+"?a+b: o=="-"?a-b: o=="*"?a*b: (b!==0? a/b:"0-ով չի կարելի");
+let a=+n1.value,b=+n2.value;
+let r= op.value=="+"?a+b: op.value=="-"?a-b: op.value=="*"?a*b:(b? a/b:"0-ով չի կարելի");
 basicResult.innerHTML=r;
 }
 </script>
