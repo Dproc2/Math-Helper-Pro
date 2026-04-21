@@ -12,6 +12,7 @@
             --border-color: #1e40af;
             --bg: #f0f4f8;
             --card-bg: #ffffff;
+            --accent: #ef4444;
         }
 
         * { box-sizing: border-box; transition: all 0.3s ease; }
@@ -26,7 +27,6 @@
             min-height: 100vh;
         }
 
-        /* ԳԵՂԵՑԻԿ ՎԵՐՆԱԳԻՐ */
         header {
             background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
             color: white;
@@ -39,7 +39,7 @@
 
         header h1 {
             margin: 0;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -50,55 +50,29 @@
             width: 95%;
             max-width: 1200px;
             margin: 40px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        /* ԲԱԺԻՆՆԵՐԻ ԴԱՍԱՎՈՐՈՒԹՅՈՒՆ */
-        .row-center {
-            display: flex;
-            justify-content: center;
-        }
-
-        .row-triple {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr); /* 3 հավասար սյունակ */
             gap: 25px;
         }
 
-        /* Նոր դասավորություն ներքևի երկու բաժնի համար */
-        .row-double-bottom {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* ՔԱՐՏԵՐԻ ՈՃԸ */
         .card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 25px;
             border: 3px solid var(--border-color);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            width: 100%;
-        }
-
-        .center-card {
-            max-width: 600px;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(30, 64, 175, 0.15);
             border-color: #3b82f6;
         }
 
         summary, .link-header {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary);
             cursor: pointer;
@@ -108,36 +82,32 @@
             border-bottom: 1px dashed #cbd5e1;
             display: block;
             width: 100%;
-            background: none;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            font-family: 'Inter', sans-serif;
         }
 
         summary::-webkit-details-marker { display: none; }
 
-        /* Սարքում ենք հղման կոճակը summary-ի տեսքով */
-        .link-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .scratch-link {
+            display: block;
+            background: #ffab19;
+            color: white;
             text-decoration: none;
-            padding: 0; /* Որպեսզի կոճակը լցնի տարածքը */
-        }
-        
-        .link-header {
-            border-bottom: none; /* Հղման մեջ գիծը պետք չէ */
-            margin: 0;
-            padding: 35px 25px; /* Հավասարեցնում ենք բարձրությունը */
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 800;
+            margin-bottom: 20px;
+            border: 2px solid #e8960f;
+            font-size: 0.9rem;
         }
 
-        /* INPUTS */
-        .input-group { margin-top: 20px; }
-        
+        .scratch-link:hover {
+            background: #ff9900;
+            transform: scale(1.05);
+        }
+
         label {
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             margin: 10px 0 5px;
             color: #475569;
@@ -145,73 +115,66 @@
 
         input, select {
             width: 100%;
-            padding: 14px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 10px;
             border: 2px solid #e2e8f0;
             background: #f8fafc;
-            font-size: 1rem;
-        }
-
-        input:focus {
-            border-color: var(--secondary);
-            outline: none;
-            background: #fff;
+            font-size: 0.95rem;
         }
 
         .calc-btn {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: var(--primary);
             color: white;
             border: none;
             border-radius: 12px;
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-top: 20px;
+            margin-top: 15px;
             cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .calc-btn:hover {
-            background: #1d4ed8;
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
         }
 
         .result {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 12px;
             background: #f1f5f9;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 700;
             color: #1e40af;
             text-align: center;
-            font-size: 1.1rem;
-            border: 1px solid #cbd5e1;
+            font-size: 1rem;
+        }
+
+        .link-card {
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .radio-label {
-            display: inline-flex;
-            align-items: center;
+            font-size: 0.8rem;
             background: #f1f5f9;
-            padding: 10px 15px;
-            border-radius: 10px;
-            margin: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-radius: 8px;
+            margin: 2px;
+            display: inline-block;
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 30px;
             color: #64748b;
-            font-weight: 500;
             margin-top: auto;
         }
 
-        /* Responsive հարմարեցումներ */
-        @media (max-width: 800px) {
-            .row-triple { grid-template-columns: 1fr; }
-            .row-double-bottom { grid-template-columns: 1fr; max-width: 600px; }
+        @media (max-width: 1024px) {
+            .container { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 700px) {
+            .container { grid-template-columns: 1fr; }
+            header h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -223,55 +186,40 @@
 
 <div class="container">
 
-    <div class="row-center">
-        <details class="card center-card">
-            <summary>🔢 Պարզ գործողություններ</summary>
-            <div class="input-group">
-                <input type="number" id="n1" placeholder="Թիվ 1">
-                <select id="op" style="margin: 15px 0;">
-                    <option value="+">Գումարում (+)</option>
-                    <option value="-">Հանում (−)</option>
-                    <option value="*">Բազմապատկում (×)</option>
-                    <option value="/">Բաժանում (÷)</option>
-                </select>
-                <input type="number" id="n2" placeholder="Թիվ 2">
-                <button class="calc-btn" onclick="calcBasic()">Հաշվել</button>
-                <div class="result" id="basicResult">Սպասում է մուտքագրման...</div>
-            </div>
-        </details>
-    </div>
+    <details class="card">
+        <summary>🚗 Շարժում (S, v, t)</summary>
+        <div class="input-group">
+            <label>Ճանապարհ (S)</label>
+            <input type="number" id="S" placeholder="կմ">
+            <label>Արագություն (v)</label>
+            <input type="number" id="v" placeholder="կմ/ժ">
+            <label>Ժամանակ (t)</label>
+            <input type="number" id="t" placeholder="ժամ">
+            <button class="calc-btn" onclick="calcMotion()">Հաշվել անհայտը</button>
+            <div class="result" id="motionResult">-</div>
+        </div>
+    </details>
 
-    <div class="row-triple">
-        <details class="card">
-            <summary>🚗 Շարժում (S, v, t)</summary>
-            <div class="input-group">
-                <label>Ճանապարհ (S)</label>
-                <input type="number" id="S" placeholder="կմ">
-                <label>Արագություն (v)</label>
-                <input type="number" id="v" placeholder="կմ/ժ">
-                <label>Ժամանակ (t)</label>
-                <input type="number" id="t" placeholder="ժամ">
-                <button class="calc-btn" onclick="calcMotion()">Հաշվել անհայտը</button>
-                <div class="result" id="motionResult">-</div>
-            </div>
-        </details>
+    <details class="card">
+        <summary>🔄 Երկու մարմնի շարժում</summary>
+        <div style="text-align: center; margin-top: 15px;">
+            <label class="radio-label"><input type="radio" name="mType" value="opposite" checked> Հանդիպակաց</label>
+            <label class="radio-label"><input type="radio" name="mType" value="same"> Նույն ուղղ.</label>
+        </div>
+        <input type="number" id="S2" placeholder="Հեռավորություն (S)" style="margin-top:10px;">
+        <input type="number" id="v1" placeholder="Արագություն v₁" style="margin-top:10px;">
+        <input type="number" id="v2" placeholder="Արագություն v₂" style="margin-top:10px;">
+        <input type="number" id="t2" placeholder="Ժամանակ (t)" style="margin-top:10px;">
+        <button class="calc-btn" onclick="calcDoubleMotion()">Հաշվել</button>
+        <div class="result" id="motion2Result">-</div>
+    </details>
 
-        <details class="card">
-            <summary>🔄 Երկու մարմնի շարժում</summary>
-            <div style="text-align: center; margin-bottom: 10px;">
-                <label class="radio-label"><input type="radio" name="mType" value="opposite" checked> Հանդիպակաց</label>
-                <label class="radio-label"><input type="radio" name="mType" value="same"> Նույն ուղղ.</label>
-            </div>
-            <input type="number" id="S2" placeholder="Հեռավորություն (S)">
-            <input type="number" id="v1" placeholder="Արագություն v₁" style="margin-top:10px;">
-            <input type="number" id="v2" placeholder="Արագություն v₂" style="margin-top:10px;">
-            <input type="number" id="t2" placeholder="Ժամանակ (t)" style="margin-top:10px;">
-            <button class="calc-btn" onclick="calcDoubleMotion()">Հաշվել</button>
-            <div class="result" id="motion2Result">-</div>
-        </details>
-
-        <details class="card">
-            <summary>💰 Տոկոսներ</summary>
+    <details class="card">
+        <summary>💰 Տոկոսներ</summary>
+        <div class="input-group" style="margin-top:15px;">
+            <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="scratch-link">
+                🦊 Հաշվել տոկոսը Scratch-ում
+            </a>
             <label>Գործողություն</label>
             <select id="percentMode">
                 <option value="of">Գտնել թվի տոկոսը</option>
@@ -283,36 +231,51 @@
             <input type="number" id="percent" placeholder="%">
             <button class="calc-btn" onclick="calcPercent()">Հաշվել</button>
             <div class="result" id="percentResult">-</div>
-        </details>
-    </div>
+        </div>
+    </details>
 
-    <div class="row-double-bottom">
-        <details class="card">
-            <summary>🍎 Մասերի խնդիրներ</summary>
-            <div class="input-group">
-                <label>Գործողություն</label>
-                <select id="fractionMode">
-                    <option value="of">Գտնել թվի մասը</option>
-                    <option value="find">Գտնել թիվը ըստ մասի</option>
-                </select>
-                <label>Թիվ</label>
-                <input type="number" id="whole" placeholder="Թիվ">
-                <label>Մաս (կոտորակ)</label>
-                <input type="text" id="fraction" placeholder="օրինակ՝ 3/4">
-                <button class="calc-btn" onclick="calcFraction()">Հաշվել</button>
-                <div class="result" id="fractionResult">-</div>
-            </div>
-        </details>
+    <details class="card">
+        <summary>🍎 Մասերի խնդիրներ</summary>
+        <div class="input-group">
+            <label>Գործողություն</label>
+            <select id="fractionMode">
+                <option value="of">Գտնել թվի մասը</option>
+                <option value="find">Գտնել թիվը ըստ մասի</option>
+            </select>
+            <label>Թիվ</label>
+            <input type="number" id="whole" placeholder="Թիվ">
+            <label>Մաս (կոտորակ)</label>
+            <input type="text" id="fraction" placeholder="օրինակ՝ 3/4">
+            <button class="calc-btn" onclick="calcFraction()">Հաշվել</button>
+            <div class="result" id="fractionResult">-</div>
+        </div>
+    </details>
 
-        <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="card link-card">
-            <button class="link-header">🌐 Կոորդինատային հարթություն</button>
-        </a>
-    </div>
+    <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="card link-card">
+        <span class="link-header" style="border:none;">🌐 Կոորդինատային հարթություն</span>
+        <p style="font-size: 0.8rem; color: #64748b;">Բացել Scratch նախագիծը</p>
+    </a>
+
+    <details class="card">
+        <summary>🔢 Պարզ գործողություններ</summary>
+        <div class="input-group">
+            <input type="number" id="n1" placeholder="Թիվ 1">
+            <select id="op" style="margin: 15px 0;">
+                <option value="+">Գումարում (+)</option>
+                <option value="-">Հանում (−)</option>
+                <option value="*">Բազմապատկում (×)</option>
+                <option value="/">Բաժանում (÷)</option>
+            </select>
+            <input type="number" id="n2" placeholder="Թիվ 2">
+            <button class="calc-btn" onclick="calcBasic()">Հաշվել</button>
+            <div class="result" id="basicResult">...</div>
+        </div>
+    </details>
 
 </div>
 
 <footer>
-    <p>© Նախագծային աշխատանք</p>
+    <p>© Նախագծային աշխատանք | 2024</p>
 </footer>
 
 <script>
@@ -332,10 +295,9 @@
         let type = document.querySelector('input[name="mType"]:checked').value;
         let res = document.getElementById("motion2Result");
         let vRel = (type === "opposite") ? (v1 + v2) : Math.abs(v1 - v2);
-
-        if (!isNaN(s) && !isNaN(v1) && !isNaN(v2) && isNaN(t)) res.innerHTML = `t = ${(s / vRel).toFixed(2)} ժ`;
-        else if (!isNaN(v1) && !isNaN(v2) && !isNaN(t) && isNaN(s)) res.innerHTML = `S = ${(vRel * t).toFixed(2)} կմ`;
-        else res.innerHTML = "Լրացրեք 3 տվյալ";
+        if (!isNaN(s) && !isNaN(vRel) && isNaN(t)) res.innerHTML = `t = ${(s / vRel).toFixed(2)} ժ`;
+        else if (!isNaN(vRel) && !isNaN(t) && isNaN(s)) res.innerHTML = `S = ${(vRel * t).toFixed(2)} կմ`;
+        else res.innerHTML = "Լրացրեք տվյալները";
     }
 
     function calcPercent() {
@@ -358,7 +320,7 @@
         let a = val('n1'), b = val('n2'), o = document.getElementById("op").value;
         let res = document.getElementById("basicResult");
         if (isNaN(a) || isNaN(b)) return res.innerHTML = "Մուտքագրեք թվերը";
-        let r = o=="+"?a+b : o=="-"?a-b : o=="*"?a*b : (b!==0? a/b : "Զրոյի բաժանում");
+        let r = o=="+"?a+b : o=="-"?a-b : o=="*"?a*b : (b!==0? (a/b).toFixed(2) : "Զրոյի բաժանում");
         res.innerHTML = `Արդյունքը՝ ${r}`;
     }
 </script>
