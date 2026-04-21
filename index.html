@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ԽՆԴԻՐՆԵՐԻ ԼՈՒԾՈՒՄ</title>
+    <title>Մաթեմատիկական Օգնական PRO</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -67,12 +67,22 @@
             gap: 25px;
         }
 
+        /* Նոր դասավորություն ներքևի երկու բաժնի համար */
+        .row-double-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
         /* ՔԱՐՏԵՐԻ ՈՃԸ */
         .card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 25px;
-            border: 3px solid var(--border-color); /* Ավելի արտահայտիչ եզրագիծ */
+            border: 3px solid var(--border-color);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             width: 100%;
         }
@@ -87,7 +97,7 @@
             border-color: #3b82f6;
         }
 
-        summary {
+        summary, .link-header {
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary);
@@ -96,9 +106,31 @@
             padding: 10px;
             text-align: center;
             border-bottom: 1px dashed #cbd5e1;
+            display: block;
+            width: 100%;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            font-family: 'Inter', sans-serif;
         }
 
         summary::-webkit-details-marker { display: none; }
+
+        /* Սարքում ենք հղման կոճակը summary-ի տեսքով */
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0; /* Որպեսզի կոճակը լցնի տարածքը */
+        }
+        
+        .link-header {
+            border-bottom: none; /* Հղման մեջ գիծը պետք չէ */
+            margin: 0;
+            padding: 35px 25px; /* Հավասարեցնում ենք բարձրությունը */
+        }
 
         /* INPUTS */
         .input-group { margin-top: 20px; }
@@ -126,7 +158,7 @@
             background: #fff;
         }
 
-        button {
+        .calc-btn {
             width: 100%;
             padding: 15px;
             background: var(--primary);
@@ -140,7 +172,7 @@
             text-transform: uppercase;
         }
 
-        button:hover {
+        .calc-btn:hover {
             background: #1d4ed8;
             box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
         }
@@ -173,17 +205,20 @@
             padding: 40px;
             color: #64748b;
             font-weight: 500;
+            margin-top: auto;
         }
 
+        /* Responsive հարմարեցումներ */
         @media (max-width: 800px) {
             .row-triple { grid-template-columns: 1fr; }
+            .row-double-bottom { grid-template-columns: 1fr; max-width: 600px; }
         }
     </style>
 </head>
 <body>
 
 <header onclick="location.reload()">
-    <h1>ՏԵՔՍՏԱՅԻՆ ԽՆԴԻՐՆԵՐԻ ՀԱՇՎԻՉ 🚀</h1>
+    <h1>Մաթեմատիկական Օգնական</h1>
 </header>
 
 <div class="container">
@@ -200,7 +235,7 @@
                     <option value="/">Բաժանում (÷)</option>
                 </select>
                 <input type="number" id="n2" placeholder="Թիվ 2">
-                <button onclick="calcBasic()">Հաշվել</button>
+                <button class="calc-btn" onclick="calcBasic()">Հաշվել</button>
                 <div class="result" id="basicResult">Սպասում է մուտքագրման...</div>
             </div>
         </details>
@@ -216,7 +251,7 @@
                 <input type="number" id="v" placeholder="կմ/ժ">
                 <label>Ժամանակ (t)</label>
                 <input type="number" id="t" placeholder="ժամ">
-                <button onclick="calcMotion()">Հաշվել անհայտը</button>
+                <button class="calc-btn" onclick="calcMotion()">Հաշվել անհայտը</button>
                 <div class="result" id="motionResult">-</div>
             </div>
         </details>
@@ -231,7 +266,7 @@
             <input type="number" id="v1" placeholder="Արագություն v₁" style="margin-top:10px;">
             <input type="number" id="v2" placeholder="Արագություն v₂" style="margin-top:10px;">
             <input type="number" id="t2" placeholder="Ժամանակ (t)" style="margin-top:10px;">
-            <button onclick="calcDoubleMotion()">Հաշվել</button>
+            <button class="calc-btn" onclick="calcDoubleMotion()">Հաշվել</button>
             <div class="result" id="motion2Result">-</div>
         </details>
 
@@ -246,13 +281,13 @@
             <input type="number" id="num" placeholder="Թիվ">
             <label>Տոկոս (%)</label>
             <input type="number" id="percent" placeholder="%">
-            <button onclick="calcPercent()">Հաշվել</button>
+            <button class="calc-btn" onclick="calcPercent()">Հաշվել</button>
             <div class="result" id="percentResult">-</div>
         </details>
     </div>
 
-    <div class="row-center">
-        <details class="card center-card">
+    <div class="row-double-bottom">
+        <details class="card">
             <summary>🍎 Մասերի խնդիրներ</summary>
             <div class="input-group">
                 <label>Գործողություն</label>
@@ -264,16 +299,20 @@
                 <input type="number" id="whole" placeholder="Թիվ">
                 <label>Մաս (կոտորակ)</label>
                 <input type="text" id="fraction" placeholder="օրինակ՝ 3/4">
-                <button onclick="calcFraction()">Հաշվել</button>
+                <button class="calc-btn" onclick="calcFraction()">Հաշվել</button>
                 <div class="result" id="fractionResult">-</div>
             </div>
         </details>
+
+        <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="card link-card">
+            <button class="link-header">🌐 Կոորդինատային հարթություն</button>
+        </a>
     </div>
 
 </div>
 
 <footer>
-    <p>© 2026 Նախագծային աշխատանք </p>
+    <p>© 2024 Նախագծային աշխատանք | Պատրաստված է GitHub-ի համար</p>
 </footer>
 
 <script>
