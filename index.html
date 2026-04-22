@@ -22,7 +22,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden; /* Թույլ չի տալիս էջը թերթել */
+            overflow: hidden;
         }
 
         body {
@@ -55,7 +55,7 @@
         .container {
             width: 95%;
             max-width: 1200px;
-            margin: auto; /* Կենտրոնացնում է էկրանի մեջտեղում */
+            margin: auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
@@ -79,7 +79,7 @@
             border-color: var(--secondary);
         }
 
-        summary, .link-header {
+        summary {
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--primary);
@@ -152,6 +152,15 @@
             font-size: 0.95rem;
         }
 
+        .formula-text {
+            display: block;
+            font-size: 0.75rem;
+            font-style: italic;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
         .radio-group {
             display: flex;
             justify-content: center;
@@ -219,13 +228,14 @@
             <label class="radio-label"><input type="radio" name="mType" value="same" onchange="toggleLate()" style="display:none"> Նույն ուղղ.</label>
             <label class="radio-label"><input type="radio" name="mType" value="late" onchange="toggleLate()" style="display:none"> Ուշ մեկնարկ</label>
         </div>
-        <div id="late-box" style="display:none;">
-            <input type="number" id="t_delay" placeholder="Ուշացման ժամանակ">
+        <div id="late-box" style="display:none; margin-bottom:10px;">
+            <label>Ուշացման ժամանակ (ժամ)</label>
+            <input type="number" id="t_delay" placeholder="t_ուշ">
         </div>
-        <input type="number" id="S2" placeholder="Հեռավորություն S" style="margin-top:8px;">
-        <input type="number" id="v1_2" placeholder="Արագություն v₁" style="margin-top:8px;">
-        <input type="number" id="v2_2" placeholder="Արագություն v₂" style="margin-top:8px;">
-        <input type="number" id="t2" placeholder="Ժամանակ t" style="margin-top:8px;">
+        <input type="number" id="S2" placeholder="Հեռավորություն S" style="margin-top:5px;">
+        <input type="number" id="v1_2" placeholder="Արագություն v₁" style="margin-top:5px;">
+        <input type="number" id="v2_2" placeholder="Արագություն v₂" style="margin-top:5px;">
+        <input type="number" id="t2" placeholder="Ժամանակ t" style="margin-top:5px;">
         <button class="calc-btn" onclick="calcDouble()">ՀԱՇՎԵԼ</button>
         <div class="result" id="motion2Result">-</div>
     </details>
@@ -296,6 +306,7 @@
         const card = document.getElementById(id);
         card.querySelectorAll('input').forEach(i => i.value = '');
         card.querySelectorAll('.result').forEach(r => r.innerHTML = '-');
+        if(id === 'c2') document.getElementById('late-box').style.display = 'none';
     }
 
     function toggleLate() {
@@ -305,45 +316,68 @@
 
     function calcMotion() {
         let s = val('S'), v = val('v'), t = val('t'), res = document.getElementById("motionResult");
-        if (!isNaN(s) && !isNaN(v)) res.innerHTML = `t = ${fNum(s/v)} ժ`;
-        else if (!isNaN(s) && !isNaN(t)) res.innerHTML = `v = ${fNum(s/t)} կմ/ժ`;
-        else if (!isNaN(v) && !isNaN(t)) res.innerHTML = `S = ${fNum(v*t)} կմ`;
-        else res.innerHTML = "Լրացրեք 2 տվյալ";
+        if (!isNaN(s) && !isNaN(v)) {
+            let ans = fNum(s/v);
+            res.innerHTML = `${ans} ժ <span class="formula-text">բանաձև՝ t = S / v</span>`;
+        } else if (!isNaN(s) && !isNaN(t)) {
+            let ans = fNum(s/t);
+            res.innerHTML = `${ans} կմ/ժ <span class="formula-text">բանաձև՝ v = S / t</span>`;
+        } else if (!isNaN(v) && !isNaN(t)) {
+            let ans = fNum(v*t);
+            res.innerHTML = `${ans} կմ <span class="formula-text">բանաձև՝ S = v * t</span>`;
+        } else res.innerHTML = "Լրացրեք 2 տվյալ";
     }
 
     function calcDouble() {
         let s = val('S2'), v1 = val('v1_2'), v2 = val('v2_2'), t = val('t2'), res = document.getElementById("motion2Result");
         let type = document.querySelector('input[name="mType"]:checked').value;
+        
         if (type === "late") {
             let d = val('t_delay') || 0;
-            res.innerHTML = `S = ${fNum(Math.abs(v1*t - v2*(t-d)))} կմ`;
+            if (isNaN(v1) || isNaN(v2) || isNaN(t)) return res.innerHTML = "Լրացրեք տվյալները";
+            let ans = fNum(Math.abs(v1*t - v2*(t-d)));
+            res.innerHTML = `${ans} կմ <span class="formula-text">բանաձև՝ S = |v₁*t - v₂*(t-t_ուշ)|</span>`;
         } else {
             let vRel = (type === "opposite") ? (v1 + v2) : Math.abs(v1 - v2);
-            if (!isNaN(s) && !isNaN(vRel)) res.innerHTML = `t = ${fNum(s/vRel)} ժ`;
-            else if (!isNaN(vRel) && !isNaN(t)) res.innerHTML = `S = ${fNum(vRel*t)} կմ`;
-            else res.innerHTML = "Լրացրեք տվյալները";
+            let sign = (type === "opposite") ? "+" : "-";
+            if (!isNaN(s) && !isNaN(vRel)) {
+                res.innerHTML = `${fNum(s/vRel)} ժ <span class="formula-text">բանաձև՝ t = S / (v₁ ${sign} v₂)</span>`;
+            } else if (!isNaN(vRel) && !isNaN(t)) {
+                res.innerHTML = `${fNum(vRel*t)} կմ <span class="formula-text">բանաձև՝ S = (v₁ ${sign} v₂) * t</span>`;
+            } else res.innerHTML = "Լրացրեք տվյալները";
         }
     }
 
     function calcPercent() {
         let n = val('num'), p = val('percent'), res = document.getElementById("percentResult");
         let mode = document.querySelector('input[name="pMode"]:checked').value;
-        if (isNaN(n) || isNaN(p)) return res.innerHTML = "Սխալ մուտք";
-        res.innerHTML = mode === "of" ? fNum(n * p / 100) : fNum(n * 100 / p);
+        if (isNaN(n) || isNaN(p)) return res.innerHTML = "Լրացրեք տվյալները";
+        
+        if (mode === "of") {
+            res.innerHTML = `${fNum(n * p / 100)} <span class="formula-text">բանաձև՝ (Թիվ * %) / 100</span>`;
+        } else {
+            res.innerHTML = `${fNum(n * 100 / p)} <span class="formula-text">բանաձև՝ (Թիվ * 100) / %</span>`;
+        }
     }
 
     function calcFraction() {
         let w = val('whole'), fStr = document.getElementById("fraction").value, res = document.getElementById("fractionResult");
         let mode = document.querySelector('input[name="fMode"]:checked').value;
         if (isNaN(w) || !fStr.includes("/")) return res.innerHTML = "Սխալ կոտորակ";
-        let [n, d] = fStr.split("/").map(Number);
-        res.innerHTML = mode === "of" ? fNum(w * n / d) : fNum(w * d / n);
+        
+        let [num, den] = fStr.split("/").map(Number);
+        if (mode === "of") {
+            res.innerHTML = `${fNum(w * num / den)} <span class="formula-text">բանաձև՝ (Թիվ * Համարիչ) / Հայտարար</span>`;
+        } else {
+            res.innerHTML = `${fNum(w * den / num)} <span class="formula-text">բանաձև՝ (Թիվ * Հայտարար) / Համարիչ</span>`;
+        }
     }
 
     function calcBasic() {
         let a = val('n1'), b = val('n2'), o = document.getElementById("op").value, res = document.getElementById("basicResult");
         if (isNaN(a) || isNaN(b)) return res.innerHTML = "???";
-        res.innerHTML = o=="+"?a+b : o=="-"?a-b : o=="*"?a*b : (b!=0?fNum(a/b):"Error");
+        let r = o=="+"?a+b : o=="-"?a-b : o=="*"?a*b : (b!=0?fNum(a/b):"Error");
+        res.innerHTML = r;
     }
 </script>
 
