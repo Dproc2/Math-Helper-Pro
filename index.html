@@ -50,7 +50,7 @@
         .container {
             width: 95%;
             max-width: 1200px;
-            margin: -30px auto 40px;
+            margin: 50px auto 60px; /* Իջեցված է ներքև */
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
@@ -87,7 +87,7 @@
 
         summary::-webkit-details-marker { display: none; }
 
-        .scratch-link {
+        .scratch-link, .thunkable-link {
             display: block;
             background: linear-gradient(135deg, #ffab19 0%, #f59e0b 100%);
             color: white;
@@ -100,7 +100,12 @@
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
         }
 
-        .scratch-link:hover { transform: scale(1.03); filter: brightness(1.1); }
+        .thunkable-link {
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .scratch-link:hover, .thunkable-link:hover { transform: scale(1.03); filter: brightness(1.1); }
 
         label {
             display: block;
@@ -163,7 +168,7 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 15px;
+            margin: 15px 0;
         }
 
         .radio-label {
@@ -186,7 +191,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center; /* Կենտրոնացում */
+            text-align: center;
         }
 
         footer {
@@ -198,11 +203,9 @@
             font-weight: 600;
         }
 
-        footer p { margin: 0; }
-
         @media (max-width: 1024px) { .container { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 700px) { 
-            .container { grid-template-columns: 1fr; margin-top: -20px; } 
+            .container { grid-template-columns: 1fr; margin-top: 20px; } 
             header h1 { font-size: 1.6rem; }
         }
     </style>
@@ -229,6 +232,7 @@
 
     <details class="card" id="c2">
         <summary onclick="resetCard('c2')">🔄 Երկու մարմնի շարժում</summary>
+        <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="thunkable-link">📱 Հաշվել հավելվածում</a>
         <div class="radio-group">
             <label class="radio-label"><input type="radio" name="mType" value="opposite" checked onchange="toggleLate()" style="display:none"> Հանդիպակաց</label>
             <label class="radio-label"><input type="radio" name="mType" value="same" onchange="toggleLate()" style="display:none"> Նույն ուղղ.</label>
@@ -265,11 +269,10 @@
 
     <details class="card" id="c4">
         <summary onclick="resetCard('c4')">🍎 Մասերի խնդիրներ</summary>
-        <label>Գործողություն</label>
-        <select id="fractionMode">
-            <option value="of">Գտնել թվի մասը</option>
-            <option value="find">Գտնել թիվը ըստ մասի</option>
-        </select>
+        <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="fractionMode" value="of" checked style="display:none"> Թվի մասը</label>
+            <label class="radio-label"><input type="radio" name="fractionMode" value="find" style="display:none"> Թիվը ըստ մասի</label>
+        </div>
         <label>Թիվ</label>
         <input type="number" id="whole">
         <label>Մաս (կոտորակ)</label>
@@ -362,7 +365,8 @@
     }
 
     function calcFraction() {
-        let w = val('whole'), fStr = document.getElementById("fraction").value, mode = document.getElementById("fractionMode").value, res = document.getElementById("fractionResult");
+        let w = val('whole'), fStr = document.getElementById("fraction").value, res = document.getElementById("fractionResult");
+        let mode = document.querySelector('input[name="fractionMode"]:checked').value;
         if (isNaN(w) || !fStr.includes("/")) return res.innerHTML = "Սխալ կոտորակ";
         let pt = fStr.split("/"), n = parseFloat(pt[0]), d = parseFloat(pt[1]);
         let ans = (mode === "of") ? (w * n / d) : (w * d / n);
