@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Մաթեմատիկա PRO</title>
+    <title>Մաթեմատիկակ PRO</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1e40af;
             --secondary: #3b82f6;
             --card-bg: #ffffff;
-            /* Մուգ և արտահայտիչ եզրագիծ */
             --border-color: #cbd5e1; 
             --border-active: #1e40af;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-strong: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
@@ -27,7 +26,6 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            /* Ավելի մուգ և հանգիստ ֆոն աչքերի համար */
             background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
             color: #0f172a;
             display: flex;
@@ -69,7 +67,6 @@
             background: var(--card-bg);
             border-radius: 20px;
             padding: 25px;
-            /* Արտահայտիչ եզրագծեր */
             border: 3px solid var(--border-color);
             box-shadow: var(--shadow);
             display: flex;
@@ -90,9 +87,7 @@
             list-style: none;
             text-align: center;
             text-transform: uppercase;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f1f5f9;
+            padding: 5px;
         }
 
         summary::-webkit-details-marker { display: none; }
@@ -105,14 +100,13 @@
             border-radius: 10px;
             text-align: center;
             font-weight: 700;
+            margin-top: 15px;
             margin-bottom: 12px;
             font-size: 0.8rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .scratch-color { background: #d97706; }
         .thunkable-color { background: #4338ca; }
-        .btn-link:hover { opacity: 0.9; transform: scale(1.02); }
 
         label {
             display: block;
@@ -131,10 +125,7 @@
             background: #f8fafc;
             font-size: 1rem;
             outline: none;
-            color: #1e293b;
         }
-
-        input:focus { border-color: var(--secondary); background: #ffffff; }
 
         .calc-btn {
             width: 100%;
@@ -146,10 +137,7 @@
             font-weight: 700;
             margin-top: 15px;
             cursor: pointer;
-            font-size: 0.9rem;
         }
-
-        .calc-btn:active { transform: scale(0.98); }
 
         .result-box {
             margin-top: 20px;
@@ -217,7 +205,7 @@
 
 <div class="container">
 
-    <details class="card" open>
+    <details class="card">
         <summary>🚗 ՇԱՐԺՈՒՄ</summary>
         <label>Ճանապարհ (S, կմ)</label>
         <input type="number" id="S1" placeholder="S">
@@ -229,9 +217,9 @@
         <div class="result-box" id="res1"><span class="res-val">-</span></div>
     </details>
 
-    <details class="card" open>
+    <details class="card">
         <summary>🔄 ԵՐԿՈՒ ՄԱՐՄԻՆՆԵՐԻ ՇԱՐԺՈՒՄ</summary>
-        <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ ՀԱՎԵԼՎԱԾՈՒՄ</a>
+        <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ THUNKABLE ՀԱՎԵԼՎԱԾՈՒՄ</a>
         <div class="radio-wrap">
             <label class="radio-btn"><input type="radio" name="mType" value="opp" checked style="display:none"> Հանդիպակաց</label>
             <label class="radio-btn"><input type="radio" name="mType" value="same" style="display:none"> Նույն ուղղ.</label>
@@ -244,9 +232,9 @@
         <div class="result-box" id="res2"><span class="res-val">-</span></div>
     </details>
 
-    <details class="card" open>
+    <details class="card">
         <summary>💰 ՏՈԿՈՍՆԵՐ</summary>
-        <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="btn-link scratch-color">🦊 SCRATCH ՏՈԿՈՍՆԵՐ</a>
+        <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="btn-link scratch-color">🦊  ՀԱՇՎԵԼ SCRATCH ՄԻՋԱՎԱՅՐՈՒՄ</a>
         <div class="radio-wrap">
             <label class="radio-btn"><input type="radio" name="pMode" value="of" checked style="display:none"> Թվի տոկոսը</label>
             <label class="radio-btn"><input type="radio" name="pMode" value="find" style="display:none"> Թիվը ըստ %-ի</label>
@@ -257,7 +245,7 @@
         <div class="result-box" id="res3"><span class="res-val">-</span></div>
     </details>
 
-    <details class="card" open>
+    <details class="card">
         <summary>🍎 ՄԱՍԵՐ</summary>
         <div class="radio-wrap">
             <label class="radio-btn"><input type="radio" name="fMode" value="of" checked style="display:none"> Թվի մասը</label>
@@ -269,16 +257,14 @@
         <div class="result-box" id="res4"><span class="res-val">-</span></div>
     </details>
 
-    <details class="card" open>
+    <details class="card">
         <summary>🌐 ԿՈՈՐԴԻՆԱՏԱՅԻՆ ՀԱՐԹՈՒԹՅՈՒՆ</summary>
-        <div style="margin-top:10px;">
-            <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="btn-link scratch-color">🦊 SCRATCH ՀԱՐԹԱԿ</a>
-            <a href="https://x.thunkable.com/copy/4b236f66bdedbd2b854b663683308794" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ ՀԱՎԵԼՎԱԾՈՒՄ</a>
-        </div>
-        <p style="text-align:center; font-size:0.8rem; color:#475569; margin-top: 15px; font-weight: bold;">ԿՈՈՐԴԻՆԱՏԱՅԻՆ ՀԱՄԱԿԱՐԳ</p>
+        <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="btn-link scratch-color">🦊 ՀԱՇՎԵԼ SCRATCH ՄԻՋԱՎԱՅՐՈՒՄ</a>
+        <a href="https://x.thunkable.com/copy/4b236f66bdedbd2b854b663683308794" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ THUNKABLE ՀԱՎԵԼՎԱԾՈՒՄ</a>
+        <p style="text-align:center; font-size:0.8rem; color:#475569; margin-top: 15px; font-weight: bold;">ԸՆՏՐԵԼ ՀԱՄԱՊԱՏԱՍԽԱՆ ՀԱՐԹԱԿԸ </p>
     </details>
 
-    <details class="card" open>
+    <details class="card">
         <summary>🔢 ՊԱՐԶ ԳՈՐԾՈՂՈՒԹՅՈՒՆՆԵՐ</summary>
         <input type="number" id="n1" placeholder="Թիվ 1" style="margin-top:10px;">
         <select id="op" style="width:100%; padding:12px; margin:10px 0; border-radius:10px; border:2px solid #e2e8f0; background:#f8fafc; font-weight: bold;">
@@ -308,9 +294,9 @@
 
     function calcMotion() {
         let s = getV('S1'), v = getV('v1'), t = getV('t1');
-        if (!isNaN(s) && !isNaN(v)) showRes('res1', fix(s/v) + " ժ", "բանաձև՝ t = S / v");
-        else if (!isNaN(s) && !isNaN(t)) showRes('res1', fix(s/t) + " կմ/ժ", "բանաձև՝ v = S / t");
-        else if (!isNaN(v) && !isNaN(t)) showRes('res1', fix(v*t) + " կմ", "բանաձև՝ S = v * t");
+        if (!isNaN(s) && !isNaN(v)) showRes('res1', fix(s/v) + " ժ", "t = S / v");
+        else if (!isNaN(s) && !isNaN(t)) showRes('res1', fix(s/t) + " կմ/ժ", "v = S / t");
+        else if (!isNaN(v) && !isNaN(t)) showRes('res1', fix(v*t) + " կմ", "S = v * t");
         else showRes('res1', "...", "Լրացրեք 2 դաշտ");
     }
 
@@ -320,24 +306,24 @@
         let vRel = (type === "opp") ? (va + vb) : Math.abs(va - vb);
         let sign = (type === "opp") ? "+" : "-";
 
-        if (!isNaN(s) && !isNaN(va) && !isNaN(vb)) showRes('res2', fix(s/vRel) + " ժ", `բանաձև՝ t = S / (V1 ${sign} V2)`);
-        else if (!isNaN(va) && !isNaN(vb) && !isNaN(t)) showRes('res2', fix(vRel*t) + " կմ", `բանաձև՝ S = (V1 ${sign} V2) * t`);
+        if (!isNaN(s) && !isNaN(va) && !isNaN(vb)) showRes('res2', fix(s/vRel) + " ժ", `t = S / (V1 ${sign} V2)`);
+        else if (!isNaN(va) && !isNaN(vb) && !isNaN(t)) showRes('res2', fix(vRel*t) + " կմ", `S = (V1 ${sign} V2) * t`);
         else showRes('res2', "...", "Լրացրեք տվյալները");
     }
 
     function calcPercent() {
         let n = getV('pNum'), p = getV('pPer'), mode = document.querySelector('input[name="pMode"]:checked').value;
         if (isNaN(n) || isNaN(p)) return showRes('res3', "...", "Մուտքագրեք թվերը");
-        if (mode === "of") showRes('res3', fix(n * p / 100), "բանաձև՝ (Թիվ * %) / 100");
-        else showRes('res3', fix(n * 100 / p), "բանաձև՝ (Թիվ * 100) / %");
+        if (mode === "of") showRes('res3', fix(n * p / 100), "(Թիվ * %) / 100");
+        else showRes('res3', fix(n * 100 / p), "(Թիվ * 100) / %");
     }
 
     function calcFraction() {
         let w = getV('fNum'), f = document.getElementById('fFrac').value, mode = document.querySelector('input[name="fMode"]:checked').value;
         if (isNaN(w) || !f.includes('/')) return showRes('res4', "...", "Օրինակ՝ 3/4");
         let [num, den] = f.split('/').map(Number);
-        if (mode === "of") showRes('res4', fix(w * num / den), "բանաձև՝ (Թիվ * Համարիչ) / Հայտարար");
-        else showRes('res4', fix(w * den / num), "բանաձև՝ (Թիվ * Հայտարար) / Համարիչ");
+        if (mode === "of") showRes('res4', fix(w * num / den), "(Թիվ * Համարիչ) / Հայտարար");
+        else showRes('res4', fix(w * den / num), "(Թիվ * Հայտարար) / Համարիչ");
     }
 
     function calcBasic() {
