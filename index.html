@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Մաթեմատիկակ PRO</title>
+    <title>Մաթեմատիկ PRO</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,169 +12,199 @@
             --card-bg: #ffffff;
             --border-color: #cbd5e1; 
             --border-active: #1e40af;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-strong: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-light: 0 10px 20px rgba(30, 64, 175, 0.12);
+            --shadow-strong: 0 15px 30px rgba(30, 64, 175, 0.25);
         }
 
-        * { box-sizing: border-box; transition: all 0.2s ease; }
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
         html, body {
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
             color: #0f172a;
-            display: flex;
-            flex-direction: column;
             align-items: center;
         }
 
         .header-box {
-            margin: 30px 0;
-            padding: 20px 45px;
+            margin: 40px 0;
+            padding: 25px 60px;
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             color: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
             text-align: center;
             cursor: pointer;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.15);
         }
 
         .header-box h1 {
             margin: 0;
-            font-size: 1.7rem;
+            font-size: 1.9rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
         }
 
         .container {
             width: 95%;
-            max-width: 1200px;
+            max-width: 1300px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            gap: 30px;
             padding: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px;
+            border-radius: 24px;
+            padding: 15px;
             border: 3px solid var(--border-color);
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
         }
 
         .card:hover {
             border-color: var(--border-active);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-strong);
         }
 
+        /* Բացված բաժնի ոճը */
+        details[open] {
+            background: #fdfdfd;
+            padding-bottom: 20px;
+        }
+
+        details[open] summary {
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+
         summary {
-            font-size: 1.4rem;
+            font-size: 1.5rem; /* Մեծացված բաժնի անուն */
             font-weight: 800;
             color: var(--primary);
             cursor: pointer;
             list-style: none;
             text-align: center;
             text-transform: uppercase;
-            padding: 5px;
+            padding: 15px;
+            display: block;
         }
 
         summary::-webkit-details-marker { display: none; }
+
+        /* Ենթաբաժնի ներքին հատվածը */
+        .content-wrap {
+            padding: 0 15px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .btn-link {
             display: block;
             color: white;
             text-decoration: none;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 12px;
             text-align: center;
             font-weight: 700;
-            margin-top: 15px;
-            margin-bottom: 12px;
-            font-size: 0.8rem;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .scratch-color { background: #d97706; }
         .thunkable-color { background: #4338ca; }
+        .btn-link:hover { filter: brightness(1.1); transform: scale(1.02); }
 
         label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            margin: 12px 0 4px;
+            margin: 15px 0 6px;
             color: #475569;
             text-transform: uppercase;
         }
 
-        input {
+        input, select {
             width: 100%;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 12px;
             border: 2px solid #e2e8f0;
             background: #f8fafc;
             font-size: 1rem;
             outline: none;
         }
 
+        input:focus { border-color: var(--secondary); background: #fff; }
+
         .calc-btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: #1e40af;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 700;
-            margin-top: 15px;
+            margin-top: 20px;
             cursor: pointer;
+            font-size: 1rem;
         }
 
+        .calc-btn:hover { background: #1e3a8a; }
+
         .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f1f5f9;
-            border-radius: 12px;
+            margin-top: 25px;
+            padding: 18px;
+            background: #f0f7ff;
+            border-radius: 15px;
             text-align: center;
-            border-left: 5px solid var(--primary);
+            border-left: 6px solid var(--primary);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .res-val {
             display: block;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: #1e3a8a;
         }
 
         .res-form {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-style: italic;
             color: #64748b;
-            margin-top: 6px;
+            margin-top: 8px;
         }
 
         .radio-wrap {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin: 10px 0 15px;
+            gap: 10px;
+            margin: 10px 0 20px;
         }
 
         .radio-btn {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             background: #e2e8f0;
-            padding: 8px 10px;
-            border-radius: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 700;
             color: #475569;
@@ -186,15 +216,18 @@
         }
 
         footer {
-            padding: 25px;
-            color: #475569;
+            margin-top: auto; /* Այս կոդը իջեցնում է ֆութերը ամենաներքև */
+            padding: 40px 20px;
+            color: #1e293b;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             text-align: center;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        @media (max-width: 1000px) { .container { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 650px) { .container { grid-template-columns: 1fr; } }
+        @media (max-width: 1100px) { .container { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 700px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -207,75 +240,87 @@
 
     <details class="card">
         <summary>🚗 ՇԱՐԺՈՒՄ</summary>
-        <label>Ճանապարհ (S, կմ)</label>
-        <input type="number" id="S1" placeholder="S">
-        <label>Արագություն (v, կմ/ժ)</label>
-        <input type="number" id="v1" placeholder="v">
-        <label>Ժամանակ (t, ժամ)</label>
-        <input type="number" id="t1" placeholder="t">
-        <button class="calc-btn" onclick="calcMotion()">ՀԱՇՎԵԼ</button>
-        <div class="result-box" id="res1"><span class="res-val">-</span></div>
+        <div class="content-wrap">
+            <label>Ճանապարհ (S, կմ)</label>
+            <input type="number" id="S1" placeholder="S">
+            <label>Արագություն (v, կմ/ժ)</label>
+            <input type="number" id="v1" placeholder="v">
+            <label>Ժամանակ (t, ժամ)</label>
+            <input type="number" id="t1" placeholder="t">
+            <button class="calc-btn" onclick="calcMotion()">ՀԱՇՎԵԼ</button>
+            <div class="result-box" id="res1"><span class="res-val">-</span></div>
+        </div>
     </details>
 
     <details class="card">
         <summary>🔄 ԵՐԿՈՒ ՄԱՐՄԻՆՆԵՐԻ ՇԱՐԺՈՒՄ</summary>
-        <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ THUNKABLE ՀԱՎԵԼՎԱԾՈՒՄ</a>
-        <div class="radio-wrap">
-            <label class="radio-btn"><input type="radio" name="mType" value="opp" checked style="display:none"> Հանդիպակաց</label>
-            <label class="radio-btn"><input type="radio" name="mType" value="same" style="display:none"> Նույն ուղղ.</label>
+        <div class="content-wrap">
+            <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ THUNKABLE ՄԻՋԱՎԱՅՐՈՒՄ</a>
+            <div class="radio-wrap">
+                <label class="radio-btn"><input type="radio" name="mType" value="opp" checked style="display:none"> Հանդիպակաց</label>
+                <label class="radio-btn"><input type="radio" name="mType" value="same" style="display:none"> Նույն ուղղ.</label>
+            </div>
+            <input type="number" id="S2" placeholder="Հեռավորություն S">
+            <input type="number" id="va" placeholder="Արագություն V1" style="margin-top:10px;">
+            <input type="number" id="vb" placeholder="Արագություն V2" style="margin-top:10px;">
+            <input type="number" id="t2" placeholder="Ժամանակ t" style="margin-top:10px;">
+            <button class="calc-btn" onclick="calcDouble()">ՀԱՇՎԵԼ</button>
+            <div class="result-box" id="res2"><span class="res-val">-</span></div>
         </div>
-        <input type="number" id="S2" placeholder="Հեռավորություն S">
-        <input type="number" id="va" placeholder="Արագություն V1">
-        <input type="number" id="vb" placeholder="Արագություն V2">
-        <input type="number" id="t2" placeholder="Ժամանակ t">
-        <button class="calc-btn" onclick="calcDouble()">ՀԱՇՎԵԼ</button>
-        <div class="result-box" id="res2"><span class="res-val">-</span></div>
     </details>
 
     <details class="card">
         <summary>💰 ՏՈԿՈՍՆԵՐ</summary>
-        <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="btn-link scratch-color">🦊  ՀԱՇՎԵԼ SCRATCH ՄԻՋԱՎԱՅՐՈՒՄ</a>
-        <div class="radio-wrap">
-            <label class="radio-btn"><input type="radio" name="pMode" value="of" checked style="display:none"> Թվի տոկոսը</label>
-            <label class="radio-btn"><input type="radio" name="pMode" value="find" style="display:none"> Թիվը ըստ %-ի</label>
+        <div class="content-wrap">
+            <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="btn-link scratch-color">🦊 ՀԱՇՎԵԼ SCRATCH ՄԻՋԱՎԱՅՐՈՋՄՈՒՄ</a>
+            <div class="radio-wrap">
+                <label class="radio-btn"><input type="radio" name="pMode" value="of" checked style="display:none"> Թվի տոկոսը</label>
+                <label class="radio-btn"><input type="radio" name="pMode" value="find" style="display:none"> Թիվը ըստ %-ի</label>
+            </div>
+            <input type="number" id="pNum" placeholder="Թիվ">
+            <input type="number" id="pPer" placeholder="Տոկոս %" style="margin-top:10px;">
+            <button class="calc-btn" onclick="calcPercent()">ՀԱՇՎԵԼ</button>
+            <div class="result-box" id="res3"><span class="res-val">-</span></div>
         </div>
-        <input type="number" id="pNum" placeholder="Թիվ">
-        <input type="number" id="pPer" placeholder="Տոկոս %">
-        <button class="calc-btn" onclick="calcPercent()">ՀԱՇՎԵԼ</button>
-        <div class="result-box" id="res3"><span class="res-val">-</span></div>
     </details>
 
     <details class="card">
         <summary>🍎 ՄԱՍԵՐ</summary>
-        <div class="radio-wrap">
-            <label class="radio-btn"><input type="radio" name="fMode" value="of" checked style="display:none"> Թվի մասը</label>
-            <label class="radio-btn"><input type="radio" name="fMode" value="find" style="display:none"> Թիվը ըստ մասի</label>
+        <div class="content-wrap">
+            <div class="radio-wrap">
+                <label class="radio-btn"><input type="radio" name="fMode" value="of" checked style="display:none"> Թվի մասը</label>
+                <label class="radio-btn"><input type="radio" name="fMode" value="find" style="display:none"> Թիվը ըստ մասի</label>
+            </div>
+            <input type="number" id="fNum" placeholder="Թիվ">
+            <input type="text" id="fFrac" placeholder="Մաս (օր. 3/4)" style="margin-top:10px;">
+            <button class="calc-btn" onclick="calcFraction()">ՀԱՇՎԵԼ</button>
+            <div class="result-box" id="res4"><span class="res-val">-</span></div>
         </div>
-        <input type="number" id="fNum" placeholder="Թիվ">
-        <input type="text" id="fFrac" placeholder="Մաս (օր. 3/4)">
-        <button class="calc-btn" onclick="calcFraction()">ՀԱՇՎԵԼ</button>
-        <div class="result-box" id="res4"><span class="res-val">-</span></div>
     </details>
 
     <details class="card">
         <summary>🌐 ԿՈՈՐԴԻՆԱՏԱՅԻՆ ՀԱՐԹՈՒԹՅՈՒՆ</summary>
-        <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="btn-link scratch-color">🦊 ՀԱՇՎԵԼ SCRATCH ՄԻՋԱՎԱՅՐՈՒՄ</a>
-        <a href="https://x.thunkable.com/copy/4b236f66bdedbd2b854b663683308794" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ THUNKABLE ՀԱՎԵԼՎԱԾՈՒՄ</a>
-        <p style="text-align:center; font-size:0.8rem; color:#475569; margin-top: 15px; font-weight: bold;">ԸՆՏՐԵԼ ՀԱՄԱՊԱՏԱՍԽԱՆ ՀԱՐԹԱԿԸ </p>
+        <div class="content-wrap">
+            <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="btn-link scratch-color">🦊 SCRATCH ՀԱՐԹԱԿ</a>
+            <a href="https://x.thunkable.com/copy/4b236f66bdedbd2b854b663683308794" target="_blank" class="btn-link thunkable-color">📱 THUNKABLE ՀԱՐԹԱԿ</a>
+            <p style="text-align:center; font-size:0.85rem; color:#475569; margin-top: 15px; font-weight: bold; background: #f1f5f9; padding: 10px; border-radius: 10px;">ԸՆՏՐԵԼ ՀԱՇՎԱՐԿԻ  ՀԱՄԱՊԱՏԱՍԽԱՆ ՄԻՋԱՎԱՅՐԸ</p>
+        </div>
     </details>
 
     <details class="card">
         <summary>🔢 ՊԱՐԶ ԳՈՐԾՈՂՈՒԹՅՈՒՆՆԵՐ</summary>
-        <input type="number" id="n1" placeholder="Թիվ 1" style="margin-top:10px;">
-        <select id="op" style="width:100%; padding:12px; margin:10px 0; border-radius:10px; border:2px solid #e2e8f0; background:#f8fafc; font-weight: bold;">
-            <option value="+">Գումարում (+)</option>
-            <option value="-">Հանում (−)</option>
-            <option value="*">Բազմապատկում (×)</option>
-            <option value="/">Բաժանում (÷)</option>
-        </select>
-        <input type="number" id="n2" placeholder="Թիվ 2">
-        <button class="calc-btn" onclick="calcBasic()">ՀԱՇՎԵԼ</button>
-        <div class="result-box" id="res6"><span class="res-val">-</span></div>
+        <div class="content-wrap">
+            <input type="number" id="n1" placeholder="Թիվ 1" style="margin-top:10px;">
+            <select id="op" style="margin:15px 0;">
+                <option value="+">Գումարում (+)</option>
+                <option value="-">Հանում (−)</option>
+                <option value="*">Բազմապատկում (×)</option>
+                <option value="/">Բաժանում (÷)</option>
+            </select>
+            <input type="number" id="n2" placeholder="Թիվ 2">
+            <button class="calc-btn" onclick="calcBasic()">ՀԱՇՎԵԼ</button>
+            <div class="result-box" id="res6"><span class="res-val">-</span></div>
+        </div>
     </details>
 
 </div>
