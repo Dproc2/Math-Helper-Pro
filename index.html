@@ -78,17 +78,7 @@
             box-shadow: var(--shadow-strong);
         }
 
-        details[open] {
-            background: #fdfdfd;
-            padding-bottom: 20px;
-        }
-
-        details[open] summary {
-            border-bottom: 2px solid #e2e8f0;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-        }
-
+        details[open] { background: #fdfdfd; padding-bottom: 20px; }
         summary {
             font-size: 1.5rem;
             font-weight: 800;
@@ -100,13 +90,9 @@
             padding: 15px;
             display: block;
         }
-
         summary::-webkit-details-marker { display: none; }
 
-        .content-wrap {
-            padding: 0 15px;
-            animation: slideDown 0.4s ease-out;
-        }
+        .content-wrap { padding: 0 15px; animation: slideDown 0.4s ease-out; }
 
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-10px); }
@@ -123,12 +109,10 @@
             font-weight: 700;
             margin: 15px 0;
             font-size: 0.85rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .scratch-color { background: #d97706; }
         .thunkable-color { background: #4338ca; }
-        .btn-link:hover { filter: brightness(1.1); transform: scale(1.02); }
 
         label {
             display: block;
@@ -149,22 +133,37 @@
             outline: none;
         }
 
-        input:focus { border-color: var(--secondary); background: #fff; }
+        .btn-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
         .calc-btn {
-            width: 100%;
             padding: 16px;
             background: #1e40af;
             color: white;
             border: none;
             border-radius: 12px;
             font-weight: 700;
-            margin-top: 20px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .reset-btn {
+            padding: 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.8rem;
         }
 
         .calc-btn:hover { background: #1e3a8a; }
+        .reset-btn:hover { background: #dc2626; }
 
         .result-box {
             margin-top: 25px;
@@ -173,31 +172,13 @@
             border-radius: 15px;
             text-align: center;
             border-left: 6px solid var(--primary);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            min-height: 60px;
         }
 
-        .res-val {
-            display: block;
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #1e3a8a;
-        }
+        .res-val { display: block; font-size: 1.4rem; font-weight: 800; color: #1e3a8a; }
+        .res-form { display: block; font-size: 0.85rem; font-style: italic; color: #64748b; margin-top: 8px; }
 
-        .res-form {
-            display: block;
-            font-size: 0.85rem;
-            font-style: italic;
-            color: #64748b;
-            margin-top: 8px;
-        }
-
-        .radio-wrap {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 10px 0 20px;
-        }
-
+        .radio-wrap { display: flex; justify-content: center; gap: 10px; margin: 10px 0 20px; }
         .radio-btn {
             font-size: 0.75rem;
             background: #e2e8f0;
@@ -205,20 +186,14 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: 700;
-            color: #475569;
         }
-
-        .radio-btn:has(input:checked) {
-            background: var(--primary);
-            color: white;
-        }
+        .radio-btn:has(input:checked) { background: var(--primary); color: white; }
 
         footer {
             margin-top: auto;
             padding: 40px 20px;
             color: #1e293b;
             font-weight: 700;
-            font-size: 0.9rem;
             text-align: center;
             width: 100%;
             background: rgba(255, 255, 255, 0.2);
@@ -236,87 +211,102 @@
 
 <div class="container">
 
-    <details class="card">
-        <summary onclick="location.reload()">🚗 ՇԱՐԺՈՒՄ</summary>
+    <details class="card" id="card1">
+        <summary>🚗 ՇԱՐԺՈՒՄ</summary>
         <div class="content-wrap">
             <label>Ճանապարհ (S, կմ)</label>
-            <input type="number" id="S1" placeholder="S">
+            <input type="number" class="input-field" id="S1" placeholder="S">
             <label>Արագություն (v, կմ/ժ)</label>
-            <input type="number" id="v1" placeholder="v">
+            <input type="number" class="input-field" id="v1" placeholder="v">
             <label>Ժամանակ (t, ժամ)</label>
-            <input type="number" id="t1" placeholder="t">
-            <button class="calc-btn" onclick="calcMotion()">ՀԱՇՎԵԼ</button>
+            <input type="number" class="input-field" id="t1" placeholder="t">
+            <div class="btn-group">
+                <button class="calc-btn" onclick="calcMotion()">ՀԱՇՎԵԼ</button>
+                <button class="reset-btn" onclick="resetSection('card1', 'res1')">ԶՐՈ</button>
+            </div>
             <div class="result-box" id="res1"><span class="res-val">-</span></div>
         </div>
     </details>
 
-    <details class="card">
-        <summary onclick="location.reload()">🔄 ԵՐԿՈՒ ՄԱՐՄԻՆՆԵՐԻ ՇԱՐԺՈՒՄ</summary>
+    <details class="card" id="card2">
+        <summary>🔄 ԵՐԿՈՒ ՄԱՐՄԻՆՆԵՐ</summary>
         <div class="content-wrap">
-            <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ THUNKABLE ՄԻՋԱՎԱՅՐՈՒՄ</a>
+            <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="btn-link thunkable-color">📱 THUNKABLE</a>
             <div class="radio-wrap">
                 <label class="radio-btn"><input type="radio" name="mType" value="opp" checked style="display:none"> Հանդիպակաց</label>
                 <label class="radio-btn"><input type="radio" name="mType" value="same" style="display:none"> Նույն ուղղ.</label>
             </div>
-            <input type="number" id="S2" placeholder="Հեռավորություն S">
-            <input type="number" id="va" placeholder="Արագություն V1" style="margin-top:10px;">
-            <input type="number" id="vb" placeholder="Արագություն V2" style="margin-top:10px;">
-            <input type="number" id="t2" placeholder="Ժամանակ t" style="margin-top:10px;">
-            <button class="calc-btn" onclick="calcDouble()">ՀԱՇՎԵԼ</button>
+            <input type="number" class="input-field" id="S2" placeholder="Հեռավորություն S">
+            <input type="number" class="input-field" id="va" placeholder="Արագություն V1" style="margin-top:10px;">
+            <input type="number" class="input-field" id="vb" placeholder="Արագություն V2" style="margin-top:10px;">
+            <input type="number" class="input-field" id="t2" placeholder="Ժամանակ t" style="margin-top:10px;">
+            <div class="btn-group">
+                <button class="calc-btn" onclick="calcDouble()">ՀԱՇՎԵԼ</button>
+                <button class="reset-btn" onclick="resetSection('card2', 'res2')">ԶՐՈ</button>
+            </div>
             <div class="result-box" id="res2"><span class="res-val">-</span></div>
         </div>
     </details>
 
-    <details class="card">
-        <summary onclick="location.reload()">💰 ՏՈԿՈՍՆԵՐ</summary>
+    <details class="card" id="card3">
+        <summary>💰 ՏՈԿՈՍՆԵՐ</summary>
         <div class="content-wrap">
-            <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="btn-link scratch-color">🦊 ՀԱՇՎԵԼ SCRATCH ՄԻՋԱՎԱՅՐՈՋՄՈՒՄ</a>
+            <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="btn-link scratch-color">🦊 SCRATCH</a>
             <div class="radio-wrap">
                 <label class="radio-btn"><input type="radio" name="pMode" value="of" checked style="display:none"> Թվի տոկոսը</label>
                 <label class="radio-btn"><input type="radio" name="pMode" value="find" style="display:none"> Թիվը ըստ %-ի</label>
             </div>
-            <input type="number" id="pNum" placeholder="Թիվ">
-            <input type="number" id="pPer" placeholder="Տոկոս %" style="margin-top:10px;">
-            <button class="calc-btn" onclick="calcPercent()">ՀԱՇՎԵԼ</button>
+            <input type="number" class="input-field" id="pNum" placeholder="Թիվ">
+            <input type="number" class="input-field" id="pPer" placeholder="Տոկոս %" style="margin-top:10px;">
+            <div class="btn-group">
+                <button class="calc-btn" onclick="calcPercent()">ՀԱՇՎԵԼ</button>
+                <button class="reset-btn" onclick="resetSection('card3', 'res3')">ԶՐՈ</button>
+            </div>
             <div class="result-box" id="res3"><span class="res-val">-</span></div>
         </div>
     </details>
 
-    <details class="card">
-        <summary onclick="location.reload()">🍎 ՄԱՍԵՐ</summary>
+    <details class="card" id="card4">
+        <summary>🍎 ՄԱՍԵՐ</summary>
         <div class="content-wrap">
             <div class="radio-wrap">
                 <label class="radio-btn"><input type="radio" name="fMode" value="of" checked style="display:none"> Թվի մասը</label>
                 <label class="radio-btn"><input type="radio" name="fMode" value="find" style="display:none"> Թիվը ըստ մասի</label>
             </div>
-            <input type="number" id="fNum" placeholder="Թիվ">
-            <input type="text" id="fFrac" placeholder="Մաս (օր. 3/4)" style="margin-top:10px;">
-            <button class="calc-btn" onclick="calcFraction()">ՀԱՇՎԵԼ</button>
+            <input type="number" class="input-field" id="fNum" placeholder="Թիվ">
+            <input type="text" class="input-field" id="fFrac" placeholder="Մաս (օր. 3/4)" style="margin-top:10px;">
+            <div class="btn-group">
+                <button class="calc-btn" onclick="calcFraction()">ՀԱՇՎԵԼ</button>
+                <button class="reset-btn" onclick="resetSection('card4', 'res4')">ԶՐՈ</button>
+            </div>
             <div class="result-box" id="res4"><span class="res-val">-</span></div>
         </div>
     </details>
 
     <details class="card">
-        <summary onclick="location.reload()">🌐 ԿՈՈՐԴԻՆԱՏԱՅԻՆ ՀԱՐԹՈՒԹՅՈՒՆ</summary>
+        <summary>🌐 ՀԱՐԹՈՒԹՅՈՒՆ</summary>
         <div class="content-wrap">
-            <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="btn-link scratch-color">🦊 SCRATCH ՀԱՐԹԱԿ</a>
-            <a href="https://x.thunkable.com/copy/4b236f66bdedbd2b854b663683308794" target="_blank" class="btn-link thunkable-color">📱 THUNKABLE ՀԱՐԹԱԿ</a>
-            <p style="text-align:center; font-size:0.85rem; color:#475569; margin-top: 15px; font-weight: bold; background: #f1f5f9; padding: 10px; border-radius: 10px;">ԸՆՏՐԵԼ ՀԱՇՎԱՐԿԻ  ՀԱՄԱՊԱՏԱՍԽԱՆ ՄԻՋԱՎԱՅՐԸ</p>
+            <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="btn-link scratch-color">🦊 SCRATCH</a>
+            <a href="https://x.thunkable.com/copy/4b236f66bdedbd2b854b663683308794" target="_blank" class="btn-link thunkable-color">📱 THUNKABLE</a>
+            <p style="text-align:center; font-size:0.85rem; color:#475569; margin-top: 15px; font-weight: bold;">ԸՆՏՐԵՔ ՀԱՐԹԱԿԸ</p>
         </div>
     </details>
 
-    <details class="card">
-        <summary onclick="location.reload()">🔢 ՊԱՐԶ ԳՈՐԾՈՂՈՒԹՅՈՒՆՆԵՐ</summary>
+    <details class="card" id="card6">
+        <summary>🔢 ԳՈՐԾՈՂՈՒԹՅՈՒՆ</summary>
         <div class="content-wrap">
-            <input type="number" id="n1" placeholder="Թիվ 1" style="margin-top:10px;">
+            <input type="number" class="input-field" id="n1" placeholder="Թիվ 1" style="margin-top:10px;">
             <select id="op" style="margin:15px 0;">
                 <option value="+">Գումարում (+)</option>
                 <option value="-">Հանում (−)</option>
                 <option value="*">Բազմապատկում (×)</option>
                 <option value="/">Բաժանում (÷)</option>
             </select>
-            <input type="number" id="n2" placeholder="Թիվ 2">
-            <button class="calc-btn" onclick="calcBasic()">ՀԱՇՎԵԼ</button>
+            <input type="number" class="input-field" id="n2" placeholder="Թիվ 2">
+            <div class="btn-group">
+                <button class="calc-btn" onclick="calcBasic()">ՀԱՇՎԵԼ</button>
+                <button class="reset-btn" onclick="resetSection('card6', 'res6')">ԶՐՈ</button>
+            </div>
             <div class="result-box" id="res6"><span class="res-val">-</span></div>
         </div>
     </details>
@@ -333,6 +323,14 @@
 
     function showRes(id, val, form) {
         document.getElementById(id).innerHTML = `<span class="res-val">${val}</span><span class="res-form">${form}</span>`;
+    }
+
+    // Զրոյացման ֆունկցիա
+    function resetSection(cardId, resId) {
+        const card = document.getElementById(cardId);
+        const inputs = card.querySelectorAll('input[type="number"], input[type="text"]');
+        inputs.forEach(input => input.value = '');
+        document.getElementById(resId).innerHTML = `<span class="res-val">-</span>`;
     }
 
     function calcMotion() {
