@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Հղումը ուղարկելիս երևացող անուն -->
+    <meta property="og:title" content="Մաթեմատիկա PRO">
+    <meta property="og:description" content="Տեքստային խնդիրների հաշվիչ">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1e40af">
+
     <title>Մաթեմատիկա PRO</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary: #1e40af;
             --secondary: #3b82f6;
             --card-bg: #ffffff;
-            --border-color: #cbd5e1; 
+            --border-color: #cbd5e1;
             --border-active: #1e40af;
             --shadow-light: 0 10px 20px rgba(30, 64, 175, 0.12);
             --shadow-strong: 0 15px 30px rgba(30, 64, 175, 0.25);
         }
 
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
         html, body {
             margin: 0;
@@ -78,7 +90,11 @@
             box-shadow: var(--shadow-strong);
         }
 
-        details[open] { background: #fdfdfd; padding-bottom: 20px; }
+        details[open] {
+            background: #fdfdfd;
+            padding-bottom: 20px;
+        }
+
         summary {
             font-size: 1.5rem;
             font-weight: 800;
@@ -90,13 +106,26 @@
             padding: 15px;
             display: block;
         }
-        summary::-webkit-details-marker { display: none; }
 
-        .content-wrap { padding: 0 15px; animation: slideDown 0.4s ease-out; }
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .content-wrap {
+            padding: 0 15px;
+            animation: slideDown 0.4s ease-out;
+        }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .btn-link {
@@ -111,8 +140,13 @@
             font-size: 0.85rem;
         }
 
-        .scratch-color { background: #d97706; }
-        .thunkable-color { background: #4338ca; }
+        .scratch-color {
+            background: #d97706;
+        }
+
+        .thunkable-color {
+            background: #4338ca;
+        }
 
         label {
             display: block;
@@ -123,7 +157,8 @@
             text-transform: uppercase;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 14px;
             border-radius: 12px;
@@ -135,9 +170,10 @@
 
         .btn-group {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 2fr auto;
             gap: 10px;
             margin-top: 20px;
+            align-items: center;
         }
 
         .calc-btn {
@@ -151,19 +187,32 @@
             font-size: 0.9rem;
         }
 
+        /* ՓՈՓՈԽՎԱԾ ԶՐՈՅԱՑՄԱՆ ԿՈՃԱԿ */
+
         .reset-btn {
-            padding: 16px;
-            background: #ef4444;
+            width: 42px;
+            height: 42px;
+            background: #16a34a;
             color: white;
             border: none;
-            border-radius: 12px;
-            font-weight: 700;
+            border-radius: 50%;
+            font-size: 1rem;
             cursor: pointer;
-            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.35);
         }
 
-        .calc-btn:hover { background: #1e3a8a; }
-        .reset-btn:hover { background: #dc2626; }
+        .reset-btn:hover {
+            background: #15803d;
+            transform: scale(1.08);
+        }
+
+        .calc-btn:hover {
+            background: #1e3a8a;
+        }
 
         .result-box {
             margin-top: 25px;
@@ -175,10 +224,28 @@
             min-height: 60px;
         }
 
-        .res-val { display: block; font-size: 1.4rem; font-weight: 800; color: #1e3a8a; }
-        .res-form { display: block; font-size: 0.85rem; font-style: italic; color: #64748b; margin-top: 8px; }
+        .res-val {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #1e3a8a;
+        }
 
-        .radio-wrap { display: flex; justify-content: center; gap: 10px; margin: 10px 0 20px; }
+        .res-form {
+            display: block;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .radio-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0 20px;
+        }
+
         .radio-btn {
             font-size: 0.75rem;
             background: #e2e8f0;
@@ -187,7 +254,11 @@
             cursor: pointer;
             font-weight: 700;
         }
-        .radio-btn:has(input:checked) { background: var(--primary); color: white; }
+
+        .radio-btn:has(input:checked) {
+            background: var(--primary);
+            color: white;
+        }
 
         footer {
             margin-top: auto;
@@ -199,10 +270,20 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        @media (max-width: 1100px) { .container { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 700px) { .container { grid-template-columns: 1fr; } }
+        @media (max-width: 1100px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
+
 <body>
 
 <div class="header-box" onclick="location.reload()">
@@ -211,104 +292,179 @@
 
 <div class="container">
 
+    <!-- ՇԱՐԺՈՒՄ -->
     <details class="card" id="card1">
         <summary>🚗 ՇԱՐԺՈՒՄ</summary>
         <div class="content-wrap">
+
             <label>Ճանապարհ (S, կմ)</label>
             <input type="number" class="input-field" id="S1" placeholder="S">
+
             <label>Արագություն (v, կմ/ժ)</label>
             <input type="number" class="input-field" id="v1" placeholder="v">
+
             <label>Ժամանակ (t, ժամ)</label>
             <input type="number" class="input-field" id="t1" placeholder="t">
+
             <div class="btn-group">
                 <button class="calc-btn" onclick="calcMotion()">ՀԱՇՎԵԼ</button>
-                <button class="reset-btn" onclick="resetSection('card1', 'res1')">🔄️</button>
+                <button class="reset-btn" onclick="resetSection('card1', 'res1')">🔄</button>
             </div>
-            <div class="result-box" id="res1"><span class="res-val">-</span></div>
+
+            <div class="result-box" id="res1">
+                <span class="res-val">-</span>
+            </div>
+
         </div>
     </details>
 
+    <!-- ԵՐԿՈՒ ՄԱՐՄԻՆ -->
     <details class="card" id="card2">
         <summary>🔄 ԵՐԿՈՒ ՄԱՐՄԻՆՆԵՐԻ ՇԱՐԺՈՒՄ</summary>
+
         <div class="content-wrap">
-            <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="btn-link thunkable-color">📱 THUNKABLE</a>
+
+            <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e"
+               target="_blank"
+               class="btn-link thunkable-color">📱 THUNKABLE</a>
+
             <div class="radio-wrap">
-                <label class="radio-btn"><input type="radio" name="mType" value="opp" checked style="display:none"> Հանդիպակաց</label>
-                <label class="radio-btn"><input type="radio" name="mType" value="same" style="display:none"> Նույն ուղղ.</label>
+                <label class="radio-btn">
+                    <input type="radio" name="mType" value="opp" checked style="display:none">
+                    Հանդիպակաց
+                </label>
+
+                <label class="radio-btn">
+                    <input type="radio" name="mType" value="same" style="display:none">
+                    Նույն ուղղ.
+                </label>
             </div>
+
             <input type="number" class="input-field" id="S2" placeholder="Հեռավորություն S">
+
             <input type="number" class="input-field" id="va" placeholder="Արագություն V1" style="margin-top:10px;">
+
             <input type="number" class="input-field" id="vb" placeholder="Արագություն V2" style="margin-top:10px;">
+
             <input type="number" class="input-field" id="t2" placeholder="Ժամանակ t" style="margin-top:10px;">
+
             <div class="btn-group">
                 <button class="calc-btn" onclick="calcDouble()">ՀԱՇՎԵԼ</button>
-                <button class="reset-btn" onclick="resetSection('card2', 'res2')">🔄️</button>
+                <button class="reset-btn" onclick="resetSection('card2', 'res2')">🔄</button>
             </div>
-            <div class="result-box" id="res2"><span class="res-val">-</span></div>
+
+            <div class="result-box" id="res2">
+                <span class="res-val">-</span>
+            </div>
+
         </div>
     </details>
 
+    <!-- ՏՈԿՈՍՆԵՐ -->
     <details class="card" id="card3">
         <summary>💰 ՏՈԿՈՍՆԵՐ</summary>
+
         <div class="content-wrap">
-            <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="btn-link scratch-color">🦊 SCRATCH</a>
+
+            <a href="https://scratch.mit.edu/projects/1307453213"
+               target="_blank"
+               class="btn-link scratch-color">🦊 SCRATCH</a>
+
             <div class="radio-wrap">
-                <label class="radio-btn"><input type="radio" name="pMode" value="of" checked style="display:none"> Գտնել թվի տոկոսը</label>
-                <label class="radio-btn"><input type="radio" name="pMode" value="find" style="display:none"> Գտնել թիվը ըստ %-ի</label>
+
+                <label class="radio-btn">
+                    <input type="radio" name="pMode" value="of" checked style="display:none">
+                    Գտնել թվի տոկոսը
+                </label>
+
+                <label class="radio-btn">
+                    <input type="radio" name="pMode" value="find" style="display:none">
+                    Գտնել թիվը ըստ %-ի
+                </label>
+
             </div>
+
             <input type="number" class="input-field" id="pNum" placeholder="Թիվ">
+
             <input type="number" class="input-field" id="pPer" placeholder="Տոկոս %" style="margin-top:10px;">
+
             <div class="btn-group">
                 <button class="calc-btn" onclick="calcPercent()">ՀԱՇՎԵԼ</button>
-                <button class="reset-btn" onclick="resetSection('card3', 'res3')">🔄️</button>
+                <button class="reset-btn" onclick="resetSection('card3', 'res3')">🔄</button>
             </div>
-            <div class="result-box" id="res3"><span class="res-val">-</span></div>
+
+            <div class="result-box" id="res3">
+                <span class="res-val">-</span>
+            </div>
+
         </div>
     </details>
 
+    <!-- ՄԱՍԵՐ -->
     <details class="card" id="card4">
         <summary>🍎 ՄԱՍԵՐ</summary>
+
         <div class="content-wrap">
+
             <div class="radio-wrap">
-                <label class="radio-btn"><input type="radio" name="fMode" value="of" checked style="display:none"> Գտնել թվի մասը</label>
-                <label class="radio-btn"><input type="radio" name="fMode" value="find" style="display:none"> Գտնել թիվը ըստ մասի</label>
+
+                <label class="radio-btn">
+                    <input type="radio" name="fMode" value="of" checked style="display:none">
+                    Գտնել թվի մասը
+                </label>
+
+                <label class="radio-btn">
+                    <input type="radio" name="fMode" value="find" style="display:none">
+                    Գտնել թիվը ըստ մասի
+                </label>
+
             </div>
+
             <input type="number" class="input-field" id="fNum" placeholder="Թիվ">
+
             <input type="text" class="input-field" id="fFrac" placeholder="Մաս (օր. 3/4)" style="margin-top:10px;">
+
             <div class="btn-group">
                 <button class="calc-btn" onclick="calcFraction()">ՀԱՇՎԵԼ</button>
-                <button class="reset-btn" onclick="resetSection('card4', 'res4')">🔄️</button>
+                <button class="reset-btn" onclick="resetSection('card4', 'res4')">🔄</button>
             </div>
-            <div class="result-box" id="res4"><span class="res-val">-</span></div>
+
+            <div class="result-box" id="res4">
+                <span class="res-val">-</span>
+            </div>
+
         </div>
     </details>
 
-    <details class="card">
-        <summary>🌐ԿՈՈՐԴԻՆԱՏԱՅԻՆ ՀԱՐԹՈՒԹՅՈՒՆ</summary>
-        <div class="content-wrap">
-            <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="btn-link scratch-color">🦊 SCRATCH</a>
-            <a href="https://x.thunkable.com/copy/4b236f66bdedbd2b854b663683308794" target="_blank" class="btn-link thunkable-color">📱 THUNKABLE</a>
-            <p style="text-align:center; font-size:0.85rem; color:#475569; margin-top: 15px; font-weight: bold;">ԸՆՏՐԵՔ ՀԱՄԱՊԱՏԱՍԽԱՆ ՀԱՐԹԱԿԸ</p>
-        </div>
-    </details>
-
+    <!-- ՊԱՐԶ ԳՈՐԾՈՂՈՒԹՅՈՒՆՆԵՐ -->
     <details class="card" id="card6">
+
         <summary>🔢 ՊԱՐԶ ԳՈՐԾՈՂՈՒԹՅՈՒՆՆԵՐ</summary>
+
         <div class="content-wrap">
+
             <input type="number" class="input-field" id="n1" placeholder="Թիվ 1" style="margin-top:10px;">
+
             <select id="op" style="margin:15px 0;">
                 <option value="+">Գումարում (+)</option>
                 <option value="-">Հանում (−)</option>
                 <option value="*">Բազմապատկում (×)</option>
                 <option value="/">Բաժանում (÷)</option>
             </select>
+
             <input type="number" class="input-field" id="n2" placeholder="Թիվ 2">
+
             <div class="btn-group">
                 <button class="calc-btn" onclick="calcBasic()">ՀԱՇՎԵԼ</button>
-                <button class="reset-btn" onclick="resetSection('card6', 'res6')">🔄️</button>
+                <button class="reset-btn" onclick="resetSection('card6', 'res6')">🔄</button>
             </div>
-            <div class="result-box" id="res6"><span class="res-val">-</span></div>
+
+            <div class="result-box" id="res6">
+                <span class="res-val">-</span>
+            </div>
+
         </div>
+
     </details>
 
 </div>
@@ -318,61 +474,150 @@
 </footer>
 
 <script>
-    const fix = (n) => Number.isInteger(n) ? n : parseFloat(n.toFixed(2));
-    const getV = (id) => parseFloat(document.getElementById(id).value);
+
+    const fix = (n) =>
+        Number.isInteger(n)
+            ? n
+            : parseFloat(n.toFixed(2));
+
+    const getV = (id) =>
+        parseFloat(document.getElementById(id).value);
 
     function showRes(id, val, form) {
-        document.getElementById(id).innerHTML = `<span class="res-val">${val}</span><span class="res-form">${form}</span>`;
+
+        document.getElementById(id).innerHTML =
+            `<span class="res-val">${val}</span>
+             <span class="res-form">${form}</span>`;
     }
 
-    // Զրոյացման ֆունկցիա
     function resetSection(cardId, resId) {
+
         const card = document.getElementById(cardId);
-        const inputs = card.querySelectorAll('input[type="number"], input[type="text"]');
+
+        const inputs = card.querySelectorAll(
+            'input[type="number"], input[type="text"]'
+        );
+
         inputs.forEach(input => input.value = '');
-        document.getElementById(resId).innerHTML = `<span class="res-val">-</span>`;
+
+        document.getElementById(resId).innerHTML =
+            `<span class="res-val">-</span>`;
     }
 
     function calcMotion() {
-        let s = getV('S1'), v = getV('v1'), t = getV('t1');
-        if (!isNaN(s) && !isNaN(v)) showRes('res1', fix(s/v) + " ժ", "t = S / v");
-        else if (!isNaN(s) && !isNaN(t)) showRes('res1', fix(s/t) + " կմ/ժ", "v = S / t");
-        else if (!isNaN(v) && !isNaN(t)) showRes('res1', fix(v*t) + " կմ", "S = v * t");
-        else showRes('res1', "...", "Լրացրեք 2 դաշտ");
+
+        let s = getV('S1'),
+            v = getV('v1'),
+            t = getV('t1');
+
+        if (!isNaN(s) && !isNaN(v))
+            showRes('res1', fix(s / v) + " ժ", "t = S / v");
+
+        else if (!isNaN(s) && !isNaN(t))
+            showRes('res1', fix(s / t) + " կմ/ժ", "v = S / t");
+
+        else if (!isNaN(v) && !isNaN(t))
+            showRes('res1', fix(v * t) + " կմ", "S = v × t");
+
+        else
+            showRes('res1', "...", "Լրացրեք 2 դաշտ");
     }
 
     function calcDouble() {
-        let s = getV('S2'), va = getV('va'), vb = getV('vb'), t = getV('t2');
-        let type = document.querySelector('input[name="mType"]:checked').value;
-        let vRel = (type === "opp") ? (va + vb) : Math.abs(va - vb);
-        let sign = (type === "opp") ? "+" : "-";
 
-        if (!isNaN(s) && !isNaN(va) && !isNaN(vb)) showRes('res2', fix(s/vRel) + " ժ", `t = S / (V1 ${sign} V2)`);
-        else if (!isNaN(va) && !isNaN(vb) && !isNaN(t)) showRes('res2', fix(vRel*t) + " կմ", `S = (V1 ${sign} V2) * t`);
-        else showRes('res2', "...", "Լրացրեք տվյալները");
+        let s = getV('S2'),
+            va = getV('va'),
+            vb = getV('vb'),
+            t = getV('t2');
+
+        let type =
+            document.querySelector('input[name="mType"]:checked').value;
+
+        let vRel =
+            (type === "opp")
+                ? (va + vb)
+                : Math.abs(va - vb);
+
+        let sign =
+            (type === "opp")
+                ? "+"
+                : "-";
+
+        if (!isNaN(s) && !isNaN(va) && !isNaN(vb))
+            showRes('res2', fix(s / vRel) + " ժ",
+                `t = S / (V1 ${sign} V2)`);
+
+        else if (!isNaN(va) && !isNaN(vb) && !isNaN(t))
+            showRes('res2', fix(vRel * t) + " կմ",
+                `S = (V1 ${sign} V2) × t`);
+
+        else
+            showRes('res2', "...", "Լրացրեք տվյալները");
     }
 
     function calcPercent() {
-        let n = getV('pNum'), p = getV('pPer'), mode = document.querySelector('input[name="pMode"]:checked').value;
-        if (isNaN(n) || isNaN(p)) return showRes('res3', "...", "Մուտքագրեք թվերը");
-        if (mode === "of") showRes('res3', fix(n * p / 100), "(Թիվ * %) / 100");
-        else showRes('res3', fix(n * 100 / p), "(Թիվ * 100) / %");
+
+        let n = getV('pNum'),
+            p = getV('pPer'),
+            mode = document.querySelector('input[name="pMode"]:checked').value;
+
+        if (isNaN(n) || isNaN(p))
+            return showRes('res3', "...", "Մուտքագրեք թվերը");
+
+        if (mode === "of")
+            showRes('res3',
+                fix(n * p / 100),
+                "(Թիվ × %) / 100");
+
+        else
+            showRes('res3',
+                fix(n * 100 / p),
+                "(Թիվ × 100) / %");
     }
 
     function calcFraction() {
-        let w = getV('fNum'), f = document.getElementById('fFrac').value, mode = document.querySelector('input[name="fMode"]:checked').value;
-        if (isNaN(w) || !f.includes('/')) return showRes('res4', "...", "Օրինակ՝ 3/4");
+
+        let w = getV('fNum'),
+            f = document.getElementById('fFrac').value,
+            mode = document.querySelector('input[name="fMode"]:checked').value;
+
+        if (isNaN(w) || !f.includes('/'))
+            return showRes('res4', "...", "Օրինակ՝ 3/4");
+
         let [num, den] = f.split('/').map(Number);
-        if (mode === "of") showRes('res4', fix(w * num / den), "(Թիվ * Համարիչ) / Հայտարար");
-        else showRes('res4', fix(w * den / num), "(Թիվ * Հայտարար) / Համարիչ");
+
+        if (mode === "of")
+            showRes('res4',
+                fix(w * num / den),
+                "(Թիվ × Համարիչ) / Հայտարար");
+
+        else
+            showRes('res4',
+                fix(w * den / num),
+                "(Թիվ × Հայտարար) / Համարիչ");
     }
 
     function calcBasic() {
-        let a = getV('n1'), b = getV('n2'), op = document.getElementById('op').value;
-        if (isNaN(a) || isNaN(b)) return showRes('res6', "???", "");
-        let r = op==='+'? a+b : op==='-'? a-b : op==='*'? a*b : (b!==0? fix(a/b) : "Error");
+
+        let a = getV('n1'),
+            b = getV('n2'),
+            op = document.getElementById('op').value;
+
+        if (isNaN(a) || isNaN(b))
+            return showRes('res6', "???", "");
+
+        let r =
+            op === '+'
+                ? a + b
+                : op === '-'
+                    ? a - b
+                    : op === '*'
+                        ? a * b
+                        : (b !== 0 ? fix(a / b) : "Error");
+
         showRes('res6', r, "");
     }
+
 </script>
 
 </body>
