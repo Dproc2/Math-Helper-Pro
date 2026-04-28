@@ -78,7 +78,6 @@
             box-shadow: var(--shadow-strong);
         }
 
-        /* Բացված բաժնի ոճը */
         details[open] {
             background: #fdfdfd;
             padding-bottom: 20px;
@@ -91,7 +90,7 @@
         }
 
         summary {
-            font-size: 1.5rem; /* Մեծացված բաժնի անուն */
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--primary);
             cursor: pointer;
@@ -104,7 +103,6 @@
 
         summary::-webkit-details-marker { display: none; }
 
-        /* Ենթաբաժնի ներքին հատվածը */
         .content-wrap {
             padding: 0 15px;
             animation: slideDown 0.4s ease-out;
@@ -216,7 +214,7 @@
         }
 
         footer {
-            margin-top: auto; /* Այս կոդը իջեցնում է ֆութերը ամենաներքև */
+            margin-top: auto;
             padding: 40px 20px;
             color: #1e293b;
             font-weight: 700;
@@ -239,7 +237,7 @@
 <div class="container">
 
     <details class="card">
-        <summary>🚗 ՇԱՐԺՈՒՄ</summary>
+        <summary onclick="location.reload()">🚗 ՇԱՐԺՈՒՄ</summary>
         <div class="content-wrap">
             <label>Ճանապարհ (S, կմ)</label>
             <input type="number" id="S1" placeholder="S">
@@ -253,7 +251,7 @@
     </details>
 
     <details class="card">
-        <summary>🔄 ԵՐԿՈՒ ՄԱՐՄԻՆՆԵՐԻ ՇԱՐԺՈՒՄ</summary>
+        <summary onclick="location.reload()">🔄 ԵՐԿՈՒ ՄԱՐՄԻՆՆԵՐԻ ՇԱՐԺՈՒՄ</summary>
         <div class="content-wrap">
             <a href="https://x.thunkable.com/copy/6afa0fdf7462e10b0d0511e81255993e" target="_blank" class="btn-link thunkable-color">📱 ՀԱՇՎԵԼ THUNKABLE ՄԻՋԱՎԱՅՐՈՒՄ</a>
             <div class="radio-wrap">
@@ -270,7 +268,7 @@
     </details>
 
     <details class="card">
-        <summary>💰 ՏՈԿՈՍՆԵՐ</summary>
+        <summary onclick="location.reload()">💰 ՏՈԿՈՍՆԵՐ</summary>
         <div class="content-wrap">
             <a href="https://scratch.mit.edu/projects/1307453213" target="_blank" class="btn-link scratch-color">🦊 ՀԱՇՎԵԼ SCRATCH ՄԻՋԱՎԱՅՐՈՋՄՈՒՄ</a>
             <div class="radio-wrap">
@@ -285,7 +283,7 @@
     </details>
 
     <details class="card">
-        <summary>🍎 ՄԱՍԵՐ</summary>
+        <summary onclick="location.reload()">🍎 ՄԱՍԵՐ</summary>
         <div class="content-wrap">
             <div class="radio-wrap">
                 <label class="radio-btn"><input type="radio" name="fMode" value="of" checked style="display:none"> Թվի մասը</label>
@@ -299,7 +297,7 @@
     </details>
 
     <details class="card">
-        <summary>🌐 ԿՈՈՐԴԻՆԱՏԱՅԻՆ ՀԱՐԹՈՒԹՅՈՒՆ</summary>
+        <summary onclick="location.reload()">🌐 ԿՈՈՐԴԻՆԱՏԱՅԻՆ ՀԱՐԹՈՒԹՅՈՒՆ</summary>
         <div class="content-wrap">
             <a href="https://scratch.mit.edu/projects/1291059748" target="_blank" class="btn-link scratch-color">🦊 SCRATCH ՀԱՐԹԱԿ</a>
             <a href="https://x.thunkable.com/copy/4b236f66bdedbd2b854b663683308794" target="_blank" class="btn-link thunkable-color">📱 THUNKABLE ՀԱՐԹԱԿ</a>
@@ -308,7 +306,7 @@
     </details>
 
     <details class="card">
-        <summary>🔢 ՊԱՐԶ ԳՈՐԾՈՂՈՒԹՅՈՒՆՆԵՐ</summary>
+        <summary onclick="location.reload()">🔢 ՊԱՐԶ ԳՈՐԾՈՂՈՒԹՅՈՒՆՆԵՐ</summary>
         <div class="content-wrap">
             <input type="number" id="n1" placeholder="Թիվ 1" style="margin-top:10px;">
             <select id="op" style="margin:15px 0;">
